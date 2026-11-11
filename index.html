@@ -2,9 +2,13 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ÔN TẬP & KIỂM TRA GIỮA HỌC KÌ 1 - KHOA HỌC TỰ NHIÊN 8 (NH 2026-2027)</title>
-    <!-- Hỗ trợ công thức Toán/Lý/Hóa -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="format-detection" content="telephone=no">
+    <title> TẬP HUẤN AN TOÀN MẠNG TOÀN DIỆN VÀ DẠY HỌC TRÍ TUỆ NHÂN TẠO (NH 2026-2027)</title>
+    <!-- Hỗ trợ công thức Toán/Lý/Hóa MathJax 3 -->
     <script>
         window.MathJax = {
             tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
@@ -12,7 +16,7 @@
         };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <!-- Thư viện hiệu ứng và tiện ích -->
+    <!-- Thư viện hiệu ứng pháo hoa Confetti và xuất/nhập Excel XLSX -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     
@@ -24,11 +28,11 @@
   
         * { -webkit-user-select: none !important; -moz-user-select: none !important; -ms-user-select: none !important; user-select: none !important; -webkit-touch-callout: none !important; box-sizing: border-box; }
         input, textarea, select { -webkit-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
+        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+        body { padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
         
-        .container { max-width: 1100px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; position: relative; z-index: 1; transform-origin: top center; transition: transform 0.2s ease-out; }
+        .container { max-width: 1100px; margin: 0 auto; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; position: relative; z-index: 1; transform-origin: top center; transition: transform 0.2s ease-out; }
         
-        .q-img { display: block; max-width: 100%; max-height: 280px; margin: 15px auto; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #e2e8f0; background: #fff; object-fit: contain; }
         #custom-alert { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: var(--danger); color: white; padding: 12px 25px; border-radius: 50px; font-weight: bold; z-index: 100000; box-shadow: 0 10px 25px rgba(239, 68, 68, 0.4); display: none; animation: slideInAlert 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 2px solid white; font-size: 0.95rem; text-transform: uppercase; text-align: center; width: max-content; max-width: 90%; }
         @keyframes slideInAlert { from { top: -50px; opacity: 0; } to { top: 20px; opacity: 1; } }
 
@@ -60,12 +64,12 @@
         .section-title { background: #f1f5f9; padding: 12px 18px; border-left: 6px solid #ff4e00; font-weight: bold; margin-bottom: 20px; color: var(--primary); font-size: 1.1rem; text-transform: uppercase; }
         .grid-2-col { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
 
-        .option { border: 2px solid #e2e8f0; border-radius: 12px; padding: 14px 20px; margin-bottom: 12px; cursor: pointer; transition: 0.3s; background: #fff; font-size: 1rem; line-height: 1.4; }
+        .option { border: 2px solid #e2e8f0; border-radius: 12px; padding: 14px 20px; margin-bottom: 12px; cursor: pointer; transition: 0.3s; background: #fff; font-size: 1rem; line-height: 1.5; }
         .option.selected { border-color: #ff4e00; background: #fff7ed; font-weight: bold; }
         .option.correct { background: #d1fae5; border-color: var(--success); color: #065f46; font-weight: bold; }
         .option.wrong { background: #fee2e2; border-color: var(--danger); color: #991b1b; }
         
-        .tf-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f1f5f9; gap: 15px; line-height: 1.4; }
+        .tf-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f1f5f9; gap: 15px; line-height: 1.5; }
         .tf-btn { border: 2px solid #cbd5e0; background: white; padding: 10px 18px; border-radius: 10px; cursor: pointer; font-weight: bold; min-width: 75px; transition: 0.2s; }
         .tf-btn.active-t { background: var(--success); color: white; border-color: var(--success); }
         .tf-btn.active-f { background: var(--danger); color: white; border-color: var(--danger); }
@@ -78,7 +82,9 @@
         .btn-admin-float { position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: #475569; color: white; border-radius: 50px; padding: 10px 20px; font-size: 0.8rem; box-shadow: 0 4px 10px rgba(0,0,0,0.3); opacity: 0.85; cursor: pointer; border: none; font-weight: bold; }
         .btn-report-float { position: fixed; bottom: 20px; left: 20px; z-index: 1000; background: var(--danger); color: white; border-radius: 50px; padding: 10px 20px; font-size: 0.8rem; box-shadow: 0 4px 10px rgba(239,68,68,0.4); opacity: 0.9; cursor: pointer; border: 2px solid #fff; font-weight: bold; }
 
-        input[type="text"], input[type="password"], input[type="email"], input[type="number"], textarea, select { padding: 12px 15px; border: 2px solid #e2e8f0; border-radius: 10px; width: 100%; box-sizing: border-box; outline: none; transition: 0.3s; font-size: 1rem; font-family: inherit; }
+        input[type="text"], input[type="password"], input[type="email"], input[type="number"], textarea, select { padding: 12px 15px; border: 2px solid #e2e8f0; border-radius: 10px; width: 100%; box-sizing: border-box; outline: none; transition: 0.3s; font-size: 16px; font-family: inherit; -webkit-appearance: none; appearance: none; touch-action: manipulation; }
+        button, .option, .btn { touch-action: manipulation; }
+        select { font-size: 16px; }
         input:focus, textarea:focus, select:focus { border-color: #ff4e00; background: #fffbeb; }
         input[readonly] { background-color: #f1f5f9; cursor: not-allowed; color: #64748b; border-color: #cbd5e0;}
 
@@ -93,7 +99,7 @@
         .admin-tab:hover { color: var(--primary); }
         .admin-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
 
-        .rank-badge { font-size: 1.5rem; font-weight: 900; margin-top: 15px; padding: 10px 25px; border-radius: 50px; display: inline-block; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); color: white; }
+        .rank-badge { font-size: 1.5rem; font-weight: 900; margin-top: 15px; padding: 10px 25px; border-radius: 50px; display: inline-block; color: white; }
         
         .admin-controls { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; background: #f1f5f9; padding: 15px; border-radius: 15px; align-items: flex-end; }
         .admin-table-container { overflow-x: auto; background: white; border-radius: 10px; border: 1px solid #e2e8f0; max-height: 500px; overflow-y: auto;}
@@ -132,7 +138,6 @@
             h3 { font-size: 1.1rem; line-height: 1.5; }
             .option { padding: 12px 15px; font-size: 0.95rem; }
             .tf-row { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .tf-row > span { margin-bottom: 5px; display: block; }
             .tf-row > div { width: 100%; display: flex; justify-content: space-between; }
             .tf-btn { flex: 1; text-align: center; padding: 12px; } 
             input.char-slot { width: 40px !important; padding: 0 !important; height: 50px; font-size: 1.3rem; }
@@ -162,8 +167,8 @@
     <canvas id="fire-canvas"></canvas>
     <div class="wish-content">
         <h1 class="wish-title">🔥 CỐ LÊN! 🔥</h1>
-        <p class="wish-sub">Chúc bạn hoàn thành tốt bài làm KHTN 8!</p>
-        <div id="wish-cheat-info" class="cheat-warning-box">HỆ THỐNG SẼ TỰ ĐỘNG NỘP BÀI<br>NẾU CHUYỂN TAB, CHIA ĐÔI MÀN HÌNH<br>HOẶC MỞ ỨNG DỤNG KHÁC</div>
+        <p class="wish-sub">Chúc Thầy / Cô hoàn thành xuất sắc bài làm kiểm tra!</p>
+        <div id="wish-cheat-info" class="cheat-warning-box">HỆ THỐNG SẼ TỰ ĐỘNG THU BÀI<br>NẾU CHUYỂN TAB, CHIA ĐÔI MÀN HÌNH<br>HOẶC MỞ CỬA SỔ NỔI</div>
     </div>
 </div>
 
@@ -187,14 +192,14 @@
         <h2 style="color: var(--danger); text-align: center; margin-top: 0; margin-bottom: 20px; font-size: 1.4rem;">GỬI BÁO LỖI</h2>
         <div style="margin-bottom: 15px;">
             <label style="font-size: 0.85rem; font-weight: bold; color: #64748b; display:block; margin-bottom:5px;">Vị trí câu lỗi / Lỗi gặp phải:</label>
-            <input type="text" id="report-question" placeholder="Ví dụ: Câu 5 phần Đ/S, Nội dung câu 2...">
+            <input type="text" id="report-question" placeholder="Ví dụ: Câu 5 phần Đ/S, Nội dung câu 3 trắc nghiệm...">
         </div>
         <div style="margin-bottom: 15px;">
             <label style="font-size: 0.85rem; font-weight: bold; color: #64748b; display:block; margin-bottom:5px;">Mô tả chi tiết:</label>
-            <textarea id="report-detail" rows="3" placeholder="Ghi rõ lỗi sai đáp án, lỗi hiển thị... (Có thể dán ảnh lỗi vào đây)"></textarea>
+            <textarea id="report-detail" rows="3" placeholder="Ghi rõ lỗi sai đáp án, lỗi công thức hiển thị..."></textarea>
         </div>
         <div style="margin-bottom: 15px;">
-            <label style="font-size: 0.85rem; font-weight: bold; color: #64748b; display:block; margin-bottom:5px;">Đính kèm hình ảnh (Chọn file hoặc ấn Ctrl+V):</label>
+            <label style="font-size: 0.85rem; font-weight: bold; color: #64748b; display:block; margin-bottom:5px;">Đính kèm hình ảnh (Chọn file hoặc Ctrl+V):</label>
             <input type="file" id="report-file" accept="image/*" style="padding: 10px; font-size: 0.85rem;">
             <img id="report-img-preview" src="" style="max-width: 100%; max-height: 150px; margin-top: 10px; display: none; border-radius: 8px; border: 1px solid #ccc; object-fit: contain;">
         </div>
@@ -210,7 +215,7 @@
     <div style="background: white; padding: 40px 25px; border-radius: 20px; max-width: 500px; width: 90%; border: 8px solid var(--danger);">
         <h1 style="color:var(--danger); font-size: 2.5rem; margin:0">CẢNH BÁO!</h1>
         <p style="font-size: 1.1rem; margin: 20px 0; color: #1e293b; font-weight: bold; line-height: 1.5;">
-            Hệ thống phát hiện bạn đã rời khỏi trình duyệt, chia đôi màn hình hoặc mở cửa sổ nổi. Bài làm đã tự động thu lại vì lý do bảo mật.
+            Hệ thống phát hiện bạn đã rời khỏi trình duyệt, chia đôi màn hình hoặc mở ứng dụng khác. Bài làm đã tự động nộp vì lý do bảo mật.
         </p>
         <button id="btn-cheat-submit" class="btn btn-fire" style="width:100%;">XEM KẾT QUẢ</button>
     </div>
@@ -238,11 +243,11 @@
     <p style="color: white; position: absolute; bottom: 20px; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.8); text-align: center; width: 100%;">Chạm bất kỳ đâu để đóng</p>
 </div>
 
-<!-- Các Modal Xác nhận Admin -->
+<!-- Các Modal Xác nhận Quản trị -->
 <div id="admin-auth-modal" class="modal-overlay" style="z-index:20000;">
     <div class="card" style="width:100%; max-width:400px; text-align:center; padding: 30px 20px; margin: auto;">
         <h2 style="color: var(--primary); margin-top:0;">Xác minh Quản trị</h2>
-        <input type="password" id="admin-pw" placeholder="Nhập mật khẩu..." style="margin-bottom:20px; text-align:center;">
+        <input type="password" id="admin-pw" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Nhập mật khẩu..." style="margin-bottom:20px; text-align:center;">
         <div class="grid-2-col">
             <button class="btn btn-gray" id="btn-auth-cancel">HỦY</button>
             <button class="btn btn-fire" id="btn-auth-confirm">XÁC NHẬN</button>
@@ -255,6 +260,7 @@
         <h2 id="auth-action-title" style="color: var(--danger); margin-top:0;">Xác nhận Hành động</h2>
         <p style="margin-bottom: 15px; color: #475569; font-size:0.9rem;">Vui lòng đăng nhập tài khoản Firebase:</p>
         <input type="email" id="delete-email" placeholder="Email Admin..." style="margin-bottom:10px; text-align:center; border:2px solid #cbd5e0;">
+        <input type="password" id="delete-adv" placeholder="Mật khẩu cao cấp (nếu có)..." autocomplete="off" style="display:none; margin-bottom:10px; text-align:center; border:2px solid var(--danger);">
         <input type="password" id="delete-pw" placeholder="Mật khẩu Admin..." style="margin-bottom:20px; text-align:center; border:2px solid var(--danger);">
         <div class="grid-2-col">
             <button class="btn btn-gray" id="btn-delete-cancel">HỦY</button>
@@ -278,7 +284,7 @@
     <div class="container">
         <header id="main-header">
             <div style="display: flex; flex-direction: column; overflow: hidden; flex: 1; padding-right: 10px;">
-                <div style="font-weight: 900; letter-spacing: 1px; color: #facc15; font-size: 1.1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">HUE SMART TEST - KHTN 8</div>
+                <div style="font-weight: 900; letter-spacing: 1px; color: #facc15; font-size: 1.1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">HUE SMART TEST - KHTN 9</div>
                 <div id="header-user-info" style="font-size: 0.75rem; color: #e2e8f0; margin-top: 3px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></div>
             </div>
             <div class="timer" id="timer" style="flex-shrink: 0;">--:--</div>
@@ -286,8 +292,8 @@
 
         <section id="screen-start" class="screen active">
             <div class="school-brand">
-                <h1 class="fire-text" style="font-size: 2.2rem;">KIỂM TRA GIỮA HỌC KÌ 1</h1>
-                <p id="banner-topic" style="color:white; opacity:0.9; margin-top:8px; font-weight: 600; letter-spacing: 0.5px;">MÔN KHOA HỌC TỰ NHIÊN 8 (NH 2026-2027)</p>
+                <h1 class="fire-text" style="font-size: 2.2rem;"> ATM VÀ DẠY HỌC TRÍ TUỆ NHÂN TẠO</h1>
+                <p id="banner-topic" style="color:white; opacity:0.9; margin-top:8px; font-weight: 600; letter-spacing: 0.5px;"> TẬP HUẤN ATM VÀ DẠY HỌC TRÍ TUỆ NHÂN TẠO (NH 2026-2027)</p>
             </div>
 
             <div class="card-start">
@@ -296,7 +302,7 @@
                 <div style="margin-bottom: 20px; background: #fffbeb; padding: 15px; border-radius: 10px; border: 2px solid #fcd34d;">
                     <label style="font-size: 0.95rem; font-weight: bold; color: #92400e; display:block; margin-bottom:8px;">🎯 CHỌN CHUYÊN ĐỀ ÔN TẬP:</label>
                     <select id="topic-select" style="font-weight: bold; color: var(--primary); border-color: #fcd34d;">
-                        <option value="khtn8_gk1">ÔN TẬP TỔNG HỢP GIỮA KÌ 1 - KHTN 8</option>
+                        <option value="khtn9_gk1"> KHẢO SÁT SAU TẬP HUẤN ATM VÀ DẠY HỌC TRÍ TUỆ NHÂN TẠO</option>
                     </select>
                 </div>
 
@@ -348,7 +354,7 @@
         <section id="screen-result" class="screen">
             <div class="card" style="background: linear-gradient(135deg, #1e40af, #1e1b4b); color: white; text-align: center; padding: 40px 20px;">
                 <h2 id="res-name" class="fire-text" style="font-size: 1.8rem; margin-bottom: 10px;">HỌC SINH</h2>
-                <div id="res-meta" style="opacity: 0.9;">Thông tin bài làm</div>
+                <div id="res-meta" style="opacity: 0.9;">Thông tin học sinh</div>
                 <div style="margin: 25px 0;">
                     <div id="final-score" style="font-size: 6rem; font-weight: 900; color: #fff; text-shadow: 0 0 20px rgba(255,255,255,0.5);">0.0</div>
                     <div id="my-rank-text" style="margin-top: 10px; font-weight: bold; color: #ffae00; font-size: 1.5rem;">HẠNG ...</div>
@@ -365,7 +371,7 @@
             </div>
         </section>
 
-        <!-- Màn hình Admin -->
+        <!-- Màn hình Quản trị -->
         <section id="screen-admin" class="screen">
             <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
                 <h2 class="fire-text" style="margin:0; font-size: 1.5rem;">BẢNG QUẢN TRỊ CAO CẤP</h2>
@@ -453,7 +459,7 @@
             <div id="admin-students-section" style="display: none;">
                 <div class="card" style="padding: 20px; margin-bottom: 20px; background: #f0fdf4; border: 2px solid #86efac;">
                     <h4 style="margin: 0 0 15px 0; color: #166534; text-transform: uppercase;">📥 Import Dữ Liệu Học Sinh</h4>
-                    <p style="font-size: 0.85rem; color: #15803d; margin-bottom: 15px;">*Chức năng này giúp tự động tạo danh sách học sinh để dùng cho thanh tìm kiếm.</p>
+                    <p style="font-size: 0.85rem; color: #15803d; margin-bottom: 15px;">*Tự động đọc danh sách từ Excel để phục vụ thanh tìm kiếm chọn tên.</p>
                     <div class="grid-2-col">
                         <button id="btn-download-template" class="btn btn-gray" style="background: #e2e8f0; color: #1e293b;"><span style="font-size: 1.2rem; margin-right: 5px;">⬇️</span> TẢI FILE MẪU EXCEL</button>
                         <button id="btn-trigger-import" class="btn btn-fire" style="background: var(--success);"><span style="font-size: 1.2rem; margin-right: 5px;">📤</span> IMPORT EXCEL</button>
@@ -499,17 +505,17 @@
         </section>
 
         <footer>
-            <div style="font-weight: 800; color: #cbd5e0; margin-bottom: 5px;">KIỂM TRA GIỮA HỌC KÌ 1 NĂM HỌC 2026-2027</div>
+            <div style="font-weight: 800; color: #cbd5e0; margin-bottom: 5px;"> KHẢO SÁT SAU TẬP HUẤN AN TOÀN MẠNG VÀ DẠY HỌC TRÍ TUỆ NHÂN TẠO </div>
             <div style="font-size: 0.85rem;">Bản quyền thuộc về Thạc sĩ Nguyễn Văn Cần, Trường THCS Thanh Thủy, Thành phố Huế</div>
         </footer>
     </div>
 </div>
 
-<!-- SCRIPT XỬ LÝ DỮ LIỆU VÀ GIAO DIỆN -->
+<!-- SCRIPT XỬ LÝ TOÀN BỘ NGÂN HÀNG ĐỀ THI VÀ CHỨC NĂNG HỆ THỐNG -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
 import { getAuth, signInAnonymously, onAuthStateChanged, setPersistence, browserSessionPersistence, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, setDoc, getDoc, writeBatch } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDg4Q6rsrvPhY31oCpL4DAAjTKlgjJN1c0",
@@ -524,10 +530,16 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-const appId_fixed = 'kham-pha-khtn-8'; 
-const collectionName = 'quiz_results_khtn8'; 
-const collectionReports = 'error_reports_khtn8';
-const collectionStudents = 'students_list_khtn8';
+const projectId = 'KHTN9_GK1';
+const appId_fixed = 'khtn-unified';
+const collectionName = 'quiz_results';
+const collectionReports = 'error_reports';
+const collectionStudents = 'students';
+// Legacy namespace retained for a separate, non-destructive data migration.
+const legacyAppId = 'kham-pha-khtn-9';
+const legacyCollectionName = 'quiz_results_khtn9';
+const legacyCollectionReports = 'error_reports_khtn9';
+const legacyCollectionStudents = 'students_list_khtn9';
 
 let currentUser = null, quizStartTime = 0, isQuizRunning = false, mode = '', currentIdx = 0, userAnswers = {}, timeLeft = 0, timerInt, currentExam = [];
 let arExamData = [], arUserAnswers = {}; 
@@ -549,96 +561,430 @@ let pendingAuthAction = null;
 let currentDeleteId = null;
 let importedStudentsCache = [];
 
-const audioPing = new Audio('https://www.soundjay.com/buttons/sounds/button-16.mp3');
-const audioFinish = new Audio('https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3');
+const mkAudio = (u) => { try { const a = new Audio(); a.preload = 'none'; a.src = u; return a; } catch (e) { return { play: () => Promise.resolve() }; } };
+const audioPing = mkAudio('https://www.soundjay.com/buttons/sounds/button-16.mp3');
+const audioFinish = mkAudio('https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3');
+const safePlay = (a) => { try { const p = a.play(); if (p && p.catch) p.catch(() => {}); } catch (e) {} };
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
 // =========================================================================
-// NGÂN HÀNG CÂU HỎI KHTN 8 GIỮA HỌC KÌ 1 CHUẨN NGUYÊN VĂN TỪ ĐỀ CƯƠNG GỐC
-// (36 MCQ, 15 TF, 18 SHORT - GIỮ NGUYÊN VẸN NỘI HÀM VÀ TỪNG NHẬN ĐỊNH)
+// BẢO MẬT MẬT KHẨU: chỉ lưu giá trị BĂM (PBKDF2-SHA256 + salt), không lưu mật khẩu gốc.
+// Định dạng: pbkdf2$<số vòng lặp>$<salt hex>$<hash hex>
+// Đổi mật khẩu: mở Console (F12) trên trang, gõ  await makePasswordHash("mat_khau_moi")  rồi dán kết quả vào đây.
+// =========================================================================
+const ADMIN_PW_HASH = 'pbkdf2$120000$98c4823ed76772153b37ccbcd35f1c82$c3ff846bb684f371fc4a186c48d475d7a59734206fa738e1dd24cccd9208ebb1';
+const ADV_PW_HASH   = ''; // Tùy chọn: băm của "mật khẩu cao cấp" lớp thứ 2 trước khi đăng nhập Firebase. Để trống = tắt.
+
+function sha256Bytes(msg) { // SHA-256 thuần JS (dự phòng khi trình duyệt không có crypto.subtle, vd http hoặc WebView cũ)
+    const K = new Uint32Array([0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2]);
+    const H = new Uint32Array([0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19]);
+    const l = msg.length, nb = ((l + 9 + 63) >> 6) << 6, buf = new Uint8Array(nb);
+    buf.set(msg); buf[l] = 0x80;
+    const dv = new DataView(buf.buffer); dv.setUint32(nb - 8, Math.floor(l / 0x20000000)); dv.setUint32(nb - 4, (l << 3) >>> 0);
+    const w = new Uint32Array(64);
+    for (let o = 0; o < nb; o += 64) {
+        for (let i = 0; i < 16; i++) w[i] = dv.getUint32(o + i * 4);
+        for (let i = 16; i < 64; i++) {
+            const a = w[i-15], b = w[i-2];
+            const s0 = ((a>>>7)|(a<<25)) ^ ((a>>>18)|(a<<14)) ^ (a>>>3), s1 = ((b>>>17)|(b<<15)) ^ ((b>>>19)|(b<<13)) ^ (b>>>10);
+            w[i] = (w[i-16] + s0 + w[i-7] + s1) | 0;
+        }
+        let [a,b,c,d,e,f,g,h] = H;
+        for (let i = 0; i < 64; i++) {
+            const S1 = ((e>>>6)|(e<<26)) ^ ((e>>>11)|(e<<21)) ^ ((e>>>25)|(e<<7)), ch = (e & f) ^ (~e & g);
+            const t1 = (h + S1 + ch + K[i] + w[i]) | 0;
+            const S0 = ((a>>>2)|(a<<30)) ^ ((a>>>13)|(a<<19)) ^ ((a>>>22)|(a<<10)), mj = (a & b) ^ (a & c) ^ (b & c);
+            const t2 = (S0 + mj) | 0;
+            h = g; g = f; f = e; e = (d + t1) | 0; d = c; c = b; b = a; a = (t1 + t2) | 0;
+        }
+        H[0]+=a; H[1]+=b; H[2]+=c; H[3]+=d; H[4]+=e; H[5]+=f; H[6]+=g; H[7]+=h;
+    }
+    const out = new Uint8Array(32), ov = new DataView(out.buffer);
+    for (let i = 0; i < 8; i++) ov.setUint32(i * 4, H[i]);
+    return out;
+}
+function pbkdf2JS(pwBytes, salt, iter) { // PBKDF2-HMAC-SHA256 (1 khối 32 byte) bằng JS thuần
+    let key = pwBytes.length > 64 ? sha256Bytes(pwBytes) : pwBytes;
+    const ik = new Uint8Array(64).fill(0x36), ok = new Uint8Array(64).fill(0x5c);
+    for (let i = 0; i < key.length; i++) { ik[i] ^= key[i]; ok[i] ^= key[i]; }
+    const hmac = (m) => { const a = new Uint8Array(64 + m.length); a.set(ik); a.set(m, 64); const ih = sha256Bytes(a); const b = new Uint8Array(96); b.set(ok); b.set(ih, 64); return sha256Bytes(b); };
+    const s = new Uint8Array(salt.length + 4); s.set(salt); s[salt.length + 3] = 1;
+    let u = hmac(s); const t = u.slice();
+    for (let i = 1; i < iter; i++) { u = hmac(u); for (let j = 0; j < 32; j++) t[j] ^= u[j]; }
+    return t;
+}
+const toHex = (u8) => Array.from(u8).map(b => b.toString(16).padStart(2, '0')).join('');
+const fromHex = (h) => new Uint8Array((h.match(/../g) || []).map(x => parseInt(x, 16)));
+async function derive(pw, saltBytes, iter) {
+    const pwBytes = new TextEncoder().encode(pw);
+    try {
+        if (window.crypto && crypto.subtle && window.isSecureContext !== false) {
+            const k = await crypto.subtle.importKey('raw', pwBytes, 'PBKDF2', false, ['deriveBits']);
+            const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt: saltBytes, iterations: iter }, k, 256);
+            return new Uint8Array(bits);
+        }
+    } catch (e) {}
+    await new Promise(r => setTimeout(r, 30));
+    return pbkdf2JS(pwBytes, saltBytes, iter);
+}
+async function makePasswordHash(pw, iter = 120000) {
+    const salt = new Uint8Array(16); (window.crypto || window.msCrypto).getRandomValues(salt);
+    return `pbkdf2$${iter}$${toHex(salt)}$${toHex(await derive(pw, salt, iter))}`;
+}
+async function verifyPassword(pw, stored) {
+    try {
+        const p = String(stored || '').split('$');
+        if (p.length !== 4 || p[0] !== 'pbkdf2') return false;
+        const got = toHex(await derive(pw, fromHex(p[2]), parseInt(p[1], 10)));
+        let diff = got.length ^ p[3].length; // so sánh thời gian không đổi
+        for (let i = 0; i < got.length; i++) diff |= got.charCodeAt(i) ^ (p[3].charCodeAt(i) || 0);
+        return diff === 0;
+    } catch (e) { return false; }
+}
+window.makePasswordHash = makePasswordHash;
+
+// Chống dò mật khẩu: khóa 60 giây sau 5 lần sai
+const lockStore = { get(k) { try { return parseInt(sessionStorage.getItem(k) || '0', 10) || 0; } catch (e) { return window['__' + k] || 0; } }, set(k, v) { try { sessionStorage.setItem(k, String(v)); } catch (e) { window['__' + k] = v; } } };
+function lockRemaining(k) { return Math.max(0, Math.ceil((lockStore.get(k + '_until') - Date.now()) / 1000)); }
+function recordFail(k) { const n = lockStore.get(k + '_n') + 1; lockStore.set(k + '_n', n); if (n >= 5) { lockStore.set(k + '_n', 0); lockStore.set(k + '_until', Date.now() + 60000); } }
+function recordOk(k) { lockStore.set(k + '_n', 0); lockStore.set(k + '_until', 0); }
+
+// =========================================================================
+// NGÂN HÀNG CÂU HỎI KHTN 9 GIỮA HỌC KÌ 1 CHUẨN TỪ ĐỀ CƯƠNG 2026-2027
+// (36 MCQ Đa Lựa Chọn, 16 TF Đúng/Sai, 20 Short Trả Lời Ngắn)
 // =========================================================================
 const QUESTION_BANK = {
-    mcq: [
-        { id: "1.1", q: "Thiết bị nào sau đây dùng để đo cường độ dòng điện trong các bài học môn Khoa học tự nhiên 8?", o: ["Ampe kế.", "Vôn kế.", "Huyết áp kế.", "Ống đong."], a: "Ampe kế.", e: "Ampe kế là dụng cụ dùng để đo cường độ dòng điện trong đoạn mạch." },
-        { id: "1.2", q: "Trong phòng thí nghiệm Khoa học tự nhiên 8, thiết bị nào có chức năng đo hiệu điện thế giữa hai đầu đoạn mạch?", o: ["Joulemeter.", "Biến áp nguồn.", "Biến trở.", "Vôn kế."], a: "Vôn kế.", e: "Vôn kế là thiết bị chuyên dụng dùng để đo hiệu điện thế giữa hai đầu đoạn mạch." },
-        { id: "1.3", q: "Thiết bị nào sau đây có chức năng cung cấp năng lượng điện hoặc đổi nguồn điện xoay chiều thành điện một chiều an toàn trong thí nghiệm điện lớp 8?", o: ["Điôt phát quang.", "Cầu chì ống.", "Nguồn điện (Pin, biến áp nguồn).", "Khóa K (công tắc)."], a: "Nguồn điện (Pin, biến áp nguồn).", e: "Pin hoặc biến áp nguồn có chức năng cung cấp năng lượng điện hoặc đổi nguồn điện an toàn trong thí nghiệm." },
-        { id: "1.4", q: "Hiện tượng nào sau đây là hiện tượng biến đổi vật lí?", o: ["Cơm bị lên men rượu.", "Đốt cháy than tạo ra khí carbon dioxide.", "Đinh sắt để ngoài không khí ẩm bị gỉ sét.", "Nước đá tan chảy thành nước lỏng khi để ở nhiệt độ phòng."], a: "Nước đá tan chảy thành nước lỏng khi để ở nhiệt độ phòng.", e: "Nước đá tan chảy chỉ thay đổi trạng thái từ rắn sang lỏng, không tạo ra chất mới nên là biến đổi vật lí." },
-        { id: "1.5", q: "Quá trình nào dưới đây diễn ra sự biến đổi hoá học?", o: ["Bẻ gãy một đoạn dây đồng thành các khúc nhỏ.", "Hoà tan đường ăn vào cốc nước lọc.", "Đốt cháy cồn trong đĩa sứ toả nhiệt và tạo chất mới.", "Đun sôi nước đến khi hơi nước bốc lên."], a: "Đốt cháy cồn trong đĩa sứ toả nhiệt và tạo chất mới.", e: "Đốt cháy cồn có phản ứng hoá học tạo ra chất mới (khí carbon dioxide và hơi nước)." },
-        { id: "1.6", q: "Phát biểu nào sau đây đúng khi định nghĩa về sự biến đổi hoá học?", o: ["Là sự biến đổi mà chất chỉ đổi màu nhưng không đổi bản chất.", "Là sự biến đổi từ chất này thành chất khác, có tạo thành chất mới.", "Là hiện tượng các chất hòa tan hoàn toàn vào nhau mà không tạo chất mới.", "Là sự thay đổi hình dạng và trạng thái tồn tại của một chất."], a: "Là sự biến đổi từ chất này thành chất khác, có tạo thành chất mới.", e: "Biến đổi hoá học là sự biến đổi từ chất này thành chất khác, có tạo thành chất mới." },
-        { id: "1.7", q: "Công thức tính tỉ khối của chất khí A đối với chất khí B ($d_{A/B}$) được biểu diễn là", o: ["$d_{A/B} = M_A + M_B$.", "$d_{A/B} = M_A \\cdot M_B$.", "$d_{A/B} = \\frac{M_A}{M_B}$.", "$d_{A/B} = \\frac{M_B}{M_A}$."], a: "$d_{A/B} = \\frac{M_A}{M_B}$.", e: "Tỉ khối của khí A đối với khí B: $d_{A/B} = \\frac{M_A}{M_B}$." },
-        { id: "1.8", q: "Khi tính tỉ khối của khí A đối với không khí ($d_{A/kk}$), khối lượng mol trung bình của không khí được quy ước lấy xấp xỉ bằng", o: ["18 g/mol.", "32 g/mol.", "44 g/mol.", "29 g/mol."], a: "29 g/mol.", e: "Khối lượng mol trung bình của không khí được quy ước lấy xấp xỉ bằng 29 g/mol." },
-        { id: "1.9", q: "Tỉ khối của chất khí A đối với chất khí B là đại lượng dùng để", o: ["đo thể tích mol của khí A ở nhiệt độ phòng.", "xác định khí A nặng hơn hay nhẹ hơn khí B bao nhiêu lần.", "xác định số phân tử có trong 1 mol khí A.", "đo áp suất chất khí trong bình kín."], a: "xác định khí A nặng hơn hay nhẹ hơn khí B bao nhiêu lần.", e: "Tỉ khối giữa hai chất khí dùng để xác định khí A nặng hơn hay nhẹ hơn khí B bao nhiêu lần." },
-        { id: "1.10", q: "Khối lượng của 0,5 mol phân tử $H_2O$ (biết khối lượng mol của $H_2O$ là 18 g/mol) là", o: ["18 g.", "9 g.", "36 g.", "4,5 g."], a: "9 g.", e: "$m = n \\cdot M = 0,5 \\cdot 18 = 9\\text{ g}$." },
-        { id: "1.11", q: "Một lượng khí oxygen ($O_2$) có khối lượng 6,4 g (biết $M_{O_2} = 32\\text{ g/mol}$). Số mol của lượng khí oxygen này là", o: ["0,5 mol.", "0,1 mol.", "0,2 mol.", "0,4 mol."], a: "0,2 mol.", e: "$n = \\frac{m}{M} = \\frac{6,4}{32} = 0,2\\text{ mol}$." },
-        { id: "1.12", q: "Đốt cháy hoàn toàn một mẩu than cần dùng vừa đủ 0,25 mol khí oxygen sinh ra khí carbon dioxide ($CO_2$). Biết khối lượng mol của carbon là 12 g/mol và oxygen là 16 g/mol, khối lượng mol của $CO_2$ và khối lượng của 0,25 mol $CO_2$ lần lượt là", o: ["28 g/mol và 7 g.", "32 g/mol và 8 g.", "44 g/mol và 11 g.", "44 g/mol và 22 g."], a: "44 g/mol và 11 g.", e: "$M_{CO_2} = 12 + 16 \\cdot 2 = 44\\text{ g/mol}$; $m = 0,25 \\cdot 44 = 11\\text{ g}$." },
-        { id: "1.13", q: "Đơn vị nào sau đây là đơn vị đo của áp suất?", o: ["Paxcan (Pa) hoặc $N/m^2$.", "Niutơn (N).", "Kilôgam trên mét khối ($kg/m^3$).", "Jun (J)."], a: "Paxcan (Pa) hoặc $N/m^2$.", e: "Đơn vị đo của áp suất là Paxcan (Pa) hoặc Niutơn trên mét vuông ($N/m^2$)." },
-        { id: "1.14", q: "Một paxcan (1 Pa) tương ứng bằng", o: ["$1\\text{ N/m}^2$.", "$100\\text{ N/m}^2$.", "$10\\text{ N/m}^2$.", "$0,1\\text{ N/m}^2$."], a: "$1\\text{ N/m}^2$.", e: "$1\\text{ Pa} = 1\\text{ N/m}^2$." },
-        { id: "1.15", q: "Ngoài đơn vị Paxcan (Pa), người ta còn sử dụng các đơn vị áp suất thông dụng khác là", o: ["$g/cm^3, kg/m^3$.", "N, kN.", "atm, mmHg, Bar.", "mol/L, g/mol."], a: "atm, mmHg, Bar.", e: "Các đơn vị áp suất thông dụng khác gồm atmosphere (atm), milimét thuỷ ngân (mmHg), Bar." },
-        { id: "1.16", q: "Trường hợp nào sau đây là ví dụ về việc làm giảm diện tích tiếp xúc để tạo ra áp suất rất lớn lên bề mặt?", o: ["Bánh xe máy kéo được làm bản rộng để không bị lún.", "Đặt tấm ván gỗ ngang qua mặt bùn lầy để đi lại.", "Móng nhà được xây thật to và rộng để dàn đều lực ép.", "Đầu mũi kim tiêm được mài thật sắc và nhọn."], a: "Đầu mũi kim tiêm được mài thật sắc và nhọn.", e: "Đầu mũi kim tiêm được mài nhọn nhằm giảm diện tích tiếp xúc $S$, giúp tạo ra áp suất rất lớn lên da." },
-        { id: "1.17", q: "Tình huống nào sau đây biểu hiện tác dụng của một vật gây ra áp suất nhỏ lên bề mặt bị ép nhờ diện tích tiếp xúc lớn?", o: ["Xe tăng sử dụng bản xích rộng thay vì các bánh xe nhỏ để đi qua đất mềm không bị lún.", "Lưỡi dao được mài bén để cắt ngọt miếng thịt.", "Đầu chiếc đinh được làm nhọn hoắt để dễ đóng vào tường gỗ.", "Rìu bổ củi có mép lưỡi rất mỏng."], a: "Xe tăng sử dụng bản xích rộng thay vì các bánh xe nhỏ để đi qua đất mềm không bị lún.", e: "Bản xích rộng có diện tích tiếp xúc lớn giúp làm giảm áp suất tác dụng lên mặt đất mềm." },
-        { id: "1.18", q: "Người ta mài sắc lưỡi dao nhằm mục đích chính là", o: ["tăng áp lực ép lên vật cần cắt.", "giảm diện tích mặt bị ép để tạo áp suất lớn, giúp cắt dễ dàng.", "tăng diện tích mặt bị ép để giảm áp suất tác dụng.", "làm giảm độ biến dạng của vật cần cắt."], a: "giảm diện tích mặt bị ép để tạo áp suất lớn, giúp cắt dễ dàng.", e: "Mài sắc lưỡi dao nhằm giảm diện tích bị ép, tạo áp suất lớn giúp việc cắt gọt dễ dàng hơn." },
-        { id: "1.19", q: "Tại sao ở các đập ngăn nước của nhà máy thuỷ điện, chân đập bao giờ cũng được xây dày và vững chắc hơn rất nhiều so với đỉnh đập?", o: ["Để chống lại lực ma sát của dòng nước chảy xiết trên mặt.", "Để làm cho đáy đập nặng hơn, giúp đập không bị nghiêng.", "Để tiết kiệm vật liệu xây dựng ở phần trên mặt nước.", "Vì áp suất chất lỏng tăng theo độ sâu, ở đáy đập áp suất nước là lớn nhất."], a: "Vì áp suất chất lỏng tăng theo độ sâu, ở đáy đập áp suất nước là lớn nhất.", e: "Áp suất chất lỏng tăng dần theo độ sâu, do đó tại chân đập áp suất của nước tác dụng là lớn nhất." },
-        { id: "1.20", q: "Một người thợ lặn càng lặn sâu xuống đáy biển thì càng cảm thấy tức ngực và phải mặc bộ đồ lặn chuyên dụng chịu áp suất cao. Nguyên nhân chính là do", o: ["nhiệt độ dưới đáy biển giảm xuống rất thấp.", "nồng độ muối khoáng trong nước biển tăng cao.", "lực cản của nước biển cản trở chuyển động của thợ lặn.", "áp suất chất lỏng tăng dần theo độ sâu của cột nước biển."], a: "áp suất chất lỏng tăng dần theo độ sâu của cột nước biển.", e: "Càng lặn xuống sâu thì độ sâu của cột chất lỏng càng tăng, dẫn đến áp suất chất lỏng tác dụng lên cơ thể càng lớn." },
-        { id: "1.21", q: "Một bình hình trụ cao chứa đầy nước, ở thành bình có khoét ba lỗ nhỏ A, B, C thẳng hàng theo phương thẳng đứng với A ở gần miệng bình, B ở giữa và C ở sát đáy bình. Khi mở cả ba lỗ, tia nước phun ra xa nhất từ lỗ nào và vì sao?", o: ["Lỗ C, vì độ sâu lớn nhất nên áp suất chất lỏng tại đó lớn nhất.", "Lỗ A, vì ở trên cao thế năng nước lớn nhất.", "Lỗ B, vì nằm ở vị trí trung tâm của bình nước.", "Cả ba lỗ phun xa như nhau vì cùng một chất lỏng."], a: "Lỗ C, vì độ sâu lớn nhất nên áp suất chất lỏng tại đó lớn nhất.", e: "Lỗ C ở sát đáy bình có độ sâu lớn nhất nên áp suất chất lỏng tại đó lớn nhất, làm tia nước phun ra xa nhất." },
-        { id: "1.22", q: "Hiện tượng nào sau đây diễn ra trong cơ thể người khi chịu sự thay đổi áp suất không khí đột ngột lúc máy bay cất cánh hoặc hạ cánh?", o: ["Tim đập chậm lại bất thường.", "Xuất hiện tiếng động lạ trong tai hoặc cảm giác bị ù tai.", "Thị lực giảm sút rõ rệt.", "Toàn thân bị run rẩy do lạnh."], a: "Xuất hiện tiếng động lạ trong tai hoặc cảm giác bị ù tai.", e: "Sự thay đổi áp suất đột ngột làm mất cân bằng áp suất ở hai bên màng nhĩ, gây hiện tượng ù tai." },
-        { id: "1.23", q: "Bộ phận nào trong tai có nhiệm vụ điều hòa và cân bằng áp suất không khí giữa tai giữa với môi trường ngoài?", o: ["Màng nhĩ.", "Vành tai.", "Vòi tai.", "Ốc tai."], a: "Vòi tai.", e: "Vòi tai (vòi Eustache) thông tai giữa với hầu họng, có nhiệm vụ cân bằng áp suất không khí." },
-        { id: "1.24", q: "Để tránh hiện tượng ù tai và làm giảm tiếng động trong tai khi thay đổi độ cao đột ngột gây ra sự mất cân bằng áp suất đột ngột ở hai bên màng nhĩ (như khi đi thang máy cao tầng, máy bay cất cánh), người ta thường áp dụng động tác sinh học nào?", o: ["Nhắm thật chặt hai mắt lại.", "Hít thở thật nhanh và nông.", "Nín thở và bịt chặt miệng.", "Cử động nuốt nước bọt hoặc ngáp."], a: "Cử động nuốt nước bọt hoặc ngáp.", e: "Động tác nuốt nước bọt hoặc ngáp giúp vòi tai mở ra, tái lập cân bằng áp suất hai bên màng nhĩ." },
-        { id: "1.25", q: "Hoạt động của giác mút cao su dán chặt trên mặt kính phẳng được giải thích dựa trên nguyên lí nào sau đây?", o: ["Khi ép giác mút, không khí bên trong bị đẩy ra ngoài, áp suất khí quyển bên ngoài lớn hơn ép chặt giác mút vào mặt kính.", "Chất keo dính đặc biệt phủ trên bề mặt cao su hút chặt vào kính.", "Nhiệt sinh ra do ma sát làm chảy một phần cao su bám chặt vào kính.", "Lực hút tĩnh điện giữa cao su và thủy tinh giữ giác mút bám chắc."], a: "Khi ép giác mút, không khí bên trong bị đẩy ra ngoài, áp suất khí quyển bên ngoài lớn hơn ép chặt giác mút vào mặt kính.", e: "Không khí bên trong giác mút bị đẩy ra ngoài khiến áp suất trong giác mút nhỏ hơn áp suất khí quyển bên ngoài, lực ép của khí quyển giữ chặt giác mút vào kính." },
-        { id: "1.26", q: "Trong bình xịt nước tưới cây cầm tay (bình xịt nén khí), thao tác ấn tay bơm liên tục trước khi phun có tác dụng gì?", o: ["Nén thêm ko khí vào bình làm áp suất khí nén trong bình tăng cao, đẩy nước thoát ra vòi phun khi mở van.", "Làm nóng dung dịch nước bên trong để dễ bay hơi.", "Khuấy tan đều các chất cặn lơ lửng trong nước.", "Làm giảm thể tích khối chất lỏng có trong bình chứa."], a: "Nén thêm ko khí vào bình làm áp suất khí nén trong bình tăng cao, đẩy nước thoát ra vòi phun khi mở van.", e: "Bơm nén thêm không khí làm tăng áp suất khí trong bình kín, tạo lực đẩy nước dâng lên và phun mạnh ra ngoài khi mở van." },
-        { id: "1.27", q: "Tàu đệm khí có thể di chuyển nhanh trên cả mặt nước và mặt đất gồ ghề là nhờ ứng dụng nguyên lí áp suất nào sau đây?", o: ["Quạt hút chân không bên dưới gầm tàu kéo con tàu sát mặt nước.", "Động cơ phản lực phun lửa trực tiếp xuống mặt đất.", "Hệ thống quạt công suất lớn bơm khí nén áp suất cao xuống đáy tàu, nâng con tàu lên giúp giảm tối đa lực ma sát.", "Lực nâng tĩnh điện giữa đáy tàu và mặt đường ngăn cách va chạm."], a: "Hệ thống quạt công suất lớn bơm khí nén áp suất cao xuống đáy tàu, nâng con tàu lên giúp giảm tối đa lực ma sát.", e: "Quạt bơm khí áp suất cao tạo đệm không khí nâng toàn bộ thân tàu lên khỏi mặt tiếp xúc, giảm tối đa lực ma sát." },
-        { id: "1.28", q: "Hiện tượng nào sau đây chứng tỏ có sự tồn tại của lực đẩy Archimedes trong chất lỏng?", o: ["Quả táo rơi từ trên cành cây xuống mặt đất.", "Đưa tay kéo một thùng hàng trượt trên mặt sàn gỗ nhẵn.", "Hòn bi sắt chìm xuống đáy cốc nước khi thả rơi tự do.", "Dùng tay nhấn một quả bóng nhựa chìm vào chậu nước, ta cảm nhận rõ có lực đẩy hướng thẳng đứng lên tay."], a: "Dùng tay nhấn một quả bóng nhựa chìm vào chậu nước, ta cảm nhận rõ có lực đẩy hướng thẳng đứng lên tay.", e: "Cảm nhận rõ lực đẩy từ nước tác dụng thẳng đứng hướng lên tay chứng minh sự tồn tại của lực đẩy Archimedes." },
-        { id: "1.29", q: "Lực đẩy do chất lỏng tác dụng lên một vật nhúng ngập trong nó có đặc điểm nào sau đây?", o: ["Có phương thẳng đứng, chiều hướng từ dưới lên trên.", "Có phương nằm ngang, chiều cùng hướng dòng chảy.", "Có phương thẳng đứng, chiều hướng từ trên xuống dưới.", "Có phương bất kì phụ thuộc vào hình dạng đáy bình chứa."], a: "Có phương thẳng đứng, chiều hướng từ dưới lên trên.", e: "Lực đẩy Archimedes có phương thẳng đứng, chiều hướng từ dưới lên trên." },
-        { id: "1.30", q: "Thả một miếng xốp khô vào chậu nước, ta thấy miếng xốp nổi trên mặt nước. Hiện tượng này chứng tỏ", o: ["chất lỏng không tác dụng lực nào lên miếng xốp.", "nước đã tác dụng một lực đẩy ngược chiều với trọng lực lên miếng xốp.", "trọng lực tác dụng lên miếng xốp có chiều hướng lên trên.", "miếng xốp có khối lượng hoàn toàn bằng 0."], a: "nước đã tác dụng một lực đẩy ngược chiều với trọng lực lên miếng xốp.", e: "Chất lỏng tác dụng lực đẩy ngược chiều trọng lực giữ cho miếng xốp cân bằng và nổi trên mặt nước." },
-        { id: "1.31", q: "Một vật nhúng chìm hoàn toàn trong chất lỏng sẽ bị chìm xuống đáy khi", o: ["lực đẩy Archimedes có độ lớn lớn hơn trọng lượng của vật ($F_A > P$).", "trọng lượng của vật có độ lớn lớn hơn lực đẩy Archimedes tác dụng lên vật ($P > F_A$).", "lực đẩy Archimedes có độ lớn đúng bằng trọng lượng của vật ($F_A = P$).", "khối lượng riêng của chất lỏng lớn hơn khối lượng riêng của vật."], a: "trọng lượng của vật có độ lớn lớn hơn lực đẩy Archimedes tác dụng lên vật ($P > F_A$).", e: "Khi nhúng ngập hoàn toàn, vật sẽ chìm xuống khi trọng lượng của vật lớn hơn lực đẩy Archimedes ($P > F_A$)." },
-        { id: "1.32", q: "Một vật nổi cân bằng trên bề mặt chất lỏng khi điều kiện nào sau đây được thỏa mãn?", o: ["Lực đẩy Archimedes nhỏ hơn trọng lượng của vật ($F_A < P$).", "Trọng lượng riêng của vật lớn hơn trọng lượng riêng của chất lỏng ($d_v > d_l$).", "Thể tích vật lớn hơn thể tích toàn bộ chất lỏng trong bình.", "Trọng lượng của vật nhỏ hơn lực đẩy Archimedes khi vật ngập hoàn toàn trong chất lỏng ($P < F_A$)."], a: "Trọng lượng của vật nhỏ hơn lực đẩy Archimedes khi vật ngập hoàn toàn trong chất lỏng ($P < F_A$).", e: "Vật nổi lên khi $P < F_{A\\text{ ngập}}$ cho đến khi nổi cân bằng trên mặt thoáng với $P = F_A$." },
-        { id: "1.33", q: "Thả đồng thời hai khối đặc có cùng thể tích vào cốc nước: khối A chìm xuống đáy cốc, khối B nổi trên mặt nước. Nhận xét nào sau đây là đúng?", o: ["Trọng lượng của khối A lớn hơn lực đẩy Archimedes tác dụng lên nó, còn khối B có trọng lượng nhỏ hơn lực đẩy Archimedes cực đại.", "Khối B chìm hoàn toàn vì trọng lượng riêng lớn hơn nước.", "Lực đẩy Archimedes không xuất hiện tác dụng lên khối A.", "Trọng lượng của hai khối đặc trên là hoàn toàn bằng nhau."], a: "Trọng lượng của khối A lớn hơn lực đẩy Archimedes tác dụng lên nó, còn khối B có trọng lượng nhỏ hơn lực đẩy Archimedes cực đại.", e: "Khối A chìm vì $P_A > F_{A(A)}$, khối B nổi vì trọng lượng $P_B$ nhỏ hơn lực đẩy Archimedes khi khối B chìm ngập hoàn toàn." },
-        { id: "1.34", q: "Một thanh sắt dài bị cong vênh, người thợ cơ khí kẹp cố định một đầu thanh sắt vào êtô rồi dùng một ống tuýp kim loại dài lồng vào đầu kia để uốn nắn lại cho thẳng. Người thợ đã vận dụng tác dụng nào sau đây?", o: ["Tác dụng nhiệt để làm nóng chảy thanh kim loại.", "Tác dụng làm quay của lực, cánh tay đòn càng dài thì moment lực càng lớn giúp uốn thanh kim loại dễ dàng hơn.", "Làm giảm lực tác dụng bằng cách uốn sát vào trục quay.", "Tác dụng truyền nguyên vẹn áp suất sang thanh sắt."], a: "Tác dụng làm quay của lực, cánh tay đòn càng dài thì moment lực càng lớn giúp uốn thanh kim loại dễ dàng hơn.", e: "Ống tuýp dài làm tăng cánh tay đòn của lực, từ đó tăng moment lực $M = F \\cdot d$ giúp uốn thẳng thanh kim loại dễ dàng." },
-        { id: "1.35", q: "Khi dùng kìm mỏ nhọn để uốn cong sợi dây thép dày, người thợ thường cầm tay vào phần chuôi thật xa trục quay của kìm vì", o: ["để bảo vệ lớp nhựa bọc ở chuôi kìm không bị rách.", "để làm giảm lực cản của không khí xung quanh kìm.", "để tăng khoảng cách đến trục quay, làm tăng moment lực giúp uốn sợi thép tốn ít sức hơn.", "để làm giảm áp suất của kìm tác dụng lên lòng bàn tay."], a: "để tăng khoảng cách đến trục quay, làm tăng moment lực giúp uốn sợi thép tốn ít sức hơn.", e: "Cầm tay xa trục quay làm tăng cánh tay đòn, làm tăng moment lực giúp uốn sợi thép đỡ tốn sức." },
-        { id: "1.36", q: "Để bẻ cong một thanh kim loại cứng tạo thành chiếc móc treo, một học sinh kẹp chặt một đầu thanh rồi dùng tay tdụng lực vuông góc vào đầu mút tự do thay vì vị trí sát điểm tự. Cách làm này mang lại hiệu quả gì?", o: ["Làm giảm chiều dài cánh tay đòn của lực tác dụng.", "Triệt tiêu hoàn toàn moment lực tác dụng lên thanh.", "Làm điểm tựa dịch chuyển theo thanh kim loại.", "Tạo ra cánh tay đòn lớn nhất, sinh ra moment lực lớn nhất làm thanh kim loại dễ dàng bị uốn cong."], a: "Tạo ra cánh tay đòn lớn nhất, sinh ra moment lực lớn nhất làm thanh kim loại dễ dàng bị uốn cong.", e: "Tác dụng lực tại đầu mút tự do tạo ra cánh tay đòn lớn nhất, sinh ra moment lực cực đại giúp bẻ cong dễ dàng." }
+    "mcq": [
+        {
+            "id": "1.1",
+            "q": "Theo Khung nội dung giáo dục AI (Quyết định 2422), nội dung cốt lõi có thời lượng bao nhiêu tiết/lớp/năm học?",
+            "o": [
+                "8 tiết.",
+                "10 tiết.",
+                "12 tiết.",
+                "15 tiết."
+            ],
+            "a": "12 tiết.",
+            "e": "Nội dung cốt lõi có thời lượng 12 tiết/lớp/năm học (QĐ 2422; CV 5588)."
+        },
+        {
+            "id": "1.2",
+            "q": "Nội dung giáo dục AI cốt lõi được tổ chức thực hiện chủ yếu thông qua hình thức nào?",
+            "o": [
+                "Các chuyên đề giáo dục AI.",
+                "Một môn học mới có bài kiểm tra riêng.",
+                "Bài kiểm tra định kì.",
+                "Chỉ qua câu lạc bộ tự chọn."
+            ],
+            "a": "Các chuyên đề giáo dục AI.",
+            "e": "Nội dung cốt lõi được tổ chức thành các chuyên đề giáo dục AI bắt buộc, 12 tiết/lớp/năm học."
+        },
+        {
+            "id": "1.3",
+            "q": "Nội dung giáo dục AI mở rộng được tổ chức với thời lượng như thế nào?",
+            "o": [
+                "Tính vào 12 tiết cốt lõi.",
+                "Thay thế một phần 12 tiết cốt lõi.",
+                "Bắt buộc với mọi học sinh trong 12 tiết.",
+                "Ngoài thời lượng 12 tiết cốt lõi."
+            ],
+            "a": "Ngoài thời lượng 12 tiết cốt lõi.",
+            "e": "Nội dung mở rộng được tổ chức ngoài 12 tiết, không thay thế và không làm giảm yêu cầu thực hiện nội dung cốt lõi."
+        },
+        {
+            "id": "1.4",
+            "q": "Văn bản nào của Bộ Giáo dục và Đào tạo hướng dẫn thực hiện nội dung giáo dục AI cho học sinh phổ thông từ năm học 2026–2027?",
+            "o": [
+                "Quyết định 3439 (Khung nội dung thí điểm).",
+                "Công văn 5588/BGDĐT-GDPT.",
+                "Thông tư 02/2025/TT-BGDĐT (Khung năng lực số).",
+                "Công văn 6206/BGDĐT-GDPT (an toàn mạng toàn diện)."
+            ],
+            "a": "Công văn 5588/BGDĐT-GDPT.",
+            "e": "Công văn 5588/BGDĐT-GDPT ngày 19/8/2026 hướng dẫn thực hiện nội dung giáo dục AI từ năm học 2026–2027."
+        },
+        {
+            "id": "1.5",
+            "q": "Thành phần nào sau đây KHÔNG thuộc bốn thành phần năng lực AI trong Khung 2422?",
+            "o": [
+                "Tư duy lấy con người làm trung tâm.",
+                "Đạo đức AI.",
+                "Quản trị mạng máy tính.",
+                "Thiết kế hệ thống AI."
+            ],
+            "a": "Quản trị mạng máy tính.",
+            "e": "Bốn thành phần: tư duy lấy con người làm trung tâm; đạo đức AI; các kĩ thuật và ứng dụng AI; thiết kế hệ thống AI."
+        },
+        {
+            "id": "1.6",
+            "q": "Các chuyên đề giáo dục AI được bố trí trong kế hoạch dạy học nào của nhà trường?",
+            "o": [
+                "Dạy học 1 buổi/ngày.",
+                "Dạy học 2 buổi/ngày.",
+                "Chỉ trong kì nghỉ hè.",
+                "Chỉ trong giờ ra chơi."
+            ],
+            "a": "Dạy học 2 buổi/ngày.",
+            "e": "Các chuyên đề được bố trí trong kế hoạch giáo dục của nhà trường và kế hoạch dạy học 2 buổi/ngày."
+        },
+        {
+            "id": "1.7",
+            "q": "Khung 2422 KHÔNG quy định nội dung nào sau đây đối với giáo dục AI?",
+            "o": [
+                "Yêu cầu cần đạt theo từng lớp.",
+                "Thời lượng 12 tiết/lớp/năm học.",
+                "Đánh giá quá trình giữ vai trò chủ đạo.",
+                "Bài kiểm tra, bài thi hoặc đầu điểm riêng."
+            ],
+            "a": "Bài kiểm tra, bài thi hoặc đầu điểm riêng.",
+            "e": "Khung không quy định bài kiểm tra, bài thi hoặc đầu điểm riêng đối với nội dung giáo dục AI."
+        },
+        {
+            "id": "1.8",
+            "q": "Trong mã yêu cầu cần đạt, tiền tố nào cho biết đó là nội dung mở rộng (không đưa vào 12 tiết cốt lõi)?",
+            "o": [
+                "CL.",
+                "MR.",
+                "NC.",
+                "TC."
+            ],
+            "a": "MR.",
+            "e": "Yêu cầu cần đạt có tiền tố “MR” trong mã thuộc nội dung mở rộng; các yêu cầu còn lại thuộc nội dung cốt lõi."
+        },
+        {
+            "id": "1.9",
+            "q": "Việc lồng ghép giáo dục AI vào các môn học và hoạt động giáo dục có vai trò nào sau đây?",
+            "o": [
+                "Thay thế 12 tiết chuyên đề.",
+                "Củng cố, vận dụng nội dung cốt lõi; không thay thế 12 tiết.",
+                "Làm tăng yêu cầu cần đạt của môn học.",
+                "Tạo thêm đầu điểm kiểm tra cho môn học."
+            ],
+            "a": "Củng cố, vận dụng nội dung cốt lõi; không thay thế 12 tiết.",
+            "e": "Lồng ghép nhằm củng cố, vận dụng nội dung cốt lõi; không thay thế 12 tiết và không làm tăng yêu cầu cần đạt của môn học."
+        },
+        {
+            "id": "1.10",
+            "q": "Khi tổ chức các hoạt động giáo dục AI bắt buộc, nhà trường KHÔNG được yêu cầu học sinh hoặc cha mẹ học sinh làm việc nào sau đây?",
+            "o": [
+                "Tham gia hoạt động học tập.",
+                "Thực hiện theo hướng dẫn của giáo viên.",
+                "Báo thầy cô khi gặp nội dung không phù hợp.",
+                "Mua tài khoản, thiết bị hoặc dịch vụ."
+            ],
+            "a": "Mua tài khoản, thiết bị hoặc dịch vụ.",
+            "e": "Không yêu cầu học sinh, cha mẹ học sinh mua tài khoản, thiết bị hay dịch vụ để tham gia các hoạt động giáo dục AI bắt buộc."
+        },
+        {
+            "id": "1.11",
+            "q": "Khi học sinh thiếu thiết bị hoặc kết nối Internet, nhà trường cần làm gì?",
+            "o": [
+                "Cho học sinh không học nội dung cốt lõi.",
+                "Yêu cầu học sinh tự mua thiết bị.",
+                "Có phương án học tập thay thế phù hợp.",
+                "Hoãn triển khai giáo dục AI."
+            ],
+            "a": "Có phương án học tập thay thế phù hợp.",
+            "e": "Cần có phương án học tập thay thế phù hợp cho học sinh thiếu thiết bị hoặc kết nối; thiếu thiết bị không phải là lí do để chậm triển khai."
+        },
+        {
+            "id": "1.12",
+            "q": "Trước khi cho học sinh tự thao tác với công cụ AI, nên hoàn thành các bài về nội dung nào?",
+            "o": [
+                "Lập trình nâng cao.",
+                "Vai trò của con người, an toàn và đạo đức.",
+                "Thiết kế hệ thống AI phức tạp.",
+                "Huấn luyện mô hình ngôn ngữ lớn."
+            ],
+            "a": "Vai trò của con người, an toàn và đạo đức.",
+            "e": "Nên hoàn thành các bài về vai trò của con người, an toàn và đạo đức trước khi để học sinh tự thao tác công cụ AI."
+        }
     ],
-    tf: [
-        { id: "2.1", ctx: "Cho các thông tin và bài tập liên quan đến dung dịch và nồng độ dung dịch:", sts: [{ l: "a)", t: "Dung dịch là hỗn hợp lỏng đồng nhất của các chất đã tan trong nhau.", a: true }, { l: "b)", t: "Độ tan của một chất trong nước là số gam chất đó hoà tan trong 1 lít nước để tạo thành dung dịch bão hoà.", a: false }, { l: "c)", t: "Hoà tan 20 gam NaCl vào 80 gam nước cất thu được dung dịch NaCl có nồng độ phần trăm là 20%.", a: true }, { l: "d)", t: "Hoà tan 0,1 mol CuSO4 vào nước thu được 200 mL dung dịch thì dung dịch có nồng độ mol là 1,0 M.", a: false }], e: "Ý b sai vì độ tan tính trên 100 g nước; ý d sai vì $C_M = 0,1 / 0,2 = 0,5\\text{ M}$." },
-        { id: "2.2", ctx: "Khi tìm hiểu về thành phần và các đại lượng đặc trưng của dung dịch:", sts: [{ l: "a)", t: "Nước đường là một dung dịch lỏng đồng nhất, trong đó đường là chất tan và nước là dung môi.", a: true }, { l: "b)", t: "Nồng độ mol của dung dịch cho biết số gam chất tan có trong 100 gam dung dịch đã cho.", a: false }, { l: "c)", t: "Ở 25 °C, hoà tan hết 36 gam NaCl trong 100 gam nước được dung dịch bão hoà thì độ tan của NaCl là 36 gam/100 gam nước.", a: true }, { l: "d)", t: "Hoà tan 4 gam NaOH trong nước để thu được 500 mL dung dịch thì nồng độ mol của dung dịch là 0,4 M.", a: false }], e: "Ý b sai vì nồng độ mol cho biết số mol chất tan trong 1 lít dung dịch; ý d sai vì $n = 4/40 = 0,1\\text{ mol} \\Rightarrow C_M = 0,1 / 0,5 = 0,2\\text{ M}$." },
-        { id: "2.3", ctx: "Xét tính chất hoà tan của các chất và công thức tính nồng độ:", sts: [{ l: "a)", t: "Khuấy đều bột sắn dây trong một cốc nước nguội ta thu được một dung dịch lỏng đồng nhất.", a: false }, { l: "b)", t: "Nồng độ phần trăm của một dung dịch cho biết số gam chất tan có trong 100 gam dung dịch đó.", a: true }, { l: "c)", t: "Hoà tan 15 gam đường vào 135 gam nước cất thì dung dịch thu được có nồng độ phần trăm là 10%.", a: true }, { l: "d)", t: "Ở 20 °C, 50 gam nước hoà tan tối đa 16 gam muối ăn thì độ tan của muối ăn ở nhiệt độ đó là 16 gam/100 gam nước.", a: false }], e: "Ý a sai vì bột sắn trong nước nguội tạo thành huyền phù; ý d sai vì 50 g nước hoà tan 16 g thì 100 g nước hoà tan 32 g ($S = 32\\text{ g}/100\\text{ g } H_2O$)." },
-        { id: "2.4", ctx: "Cho phản ứng giữa kim loại nhôm (Al) và khí oxygen (O2) tạo thành aluminium oxide (Al2O3):", sts: [{ l: "a)", t: "Phương trình hoá học cho biết tỉ lệ số nguyên tử, số phân tử giữa các chất trong phản ứng.", a: true }, { l: "b)", t: "Phương trình hoá học biểu diễn phản ứng trên là: Al + O2 → Al2O3.", a: false }, { l: "c)", t: "Đốt cháy hoàn toàn 0,2 mol Al cần dùng vừa đủ 3,7185 lít khí O2 đo ở điều kiện chuẩn (25 °C, 1 bar).", a: true }, { l: "d)", t: "Theo lí thuyết thu được 10,2 gam Al2O3 nhưng thực tế chỉ thu được 8,16 gam thì hiệu suất phản ứng là 70%.", a: false }], e: "Ý b sai vì chưa cân bằng (đúng là $4Al + 3O_2 \\rightarrow 2Al_2O_3$); ý d sai vì $H = (8,16 / 10,2) \\cdot 100\\% = 80\\%$." },
-        { id: "2.5", ctx: "Xét phản ứng hoá học giữa kẽm (Zn) và dung dịch hydrochloric acid (HCl):", sts: [{ l: "a)", t: "Tỉ lệ các hệ số trong phương trình hoá học luôn bằng đúng với tỉ lệ về khối lượng giữa các chất.", a: false }, { l: "b)", t: "Sơ đồ phản ứng dạng chữ là: Kẽm + Hydrochloric acid → Zinc chloride + Khí hydrogen.", a: true }, { l: "c)", t: "Cho 0,1 mol Zn phản ứng hoàn toàn với HCl dư thì thu được 2,479 lít khí H2 ở 25 °C và 1 bar.", a: true }, { l: "d)", t: "Khối lượng ZnCl2 tính theo lí thuyết là 13,6 gam nhưng thực tế chỉ thu được 10,88 gam thì hiệu suất là 90%.", a: false }], e: "Ý a sai vì hệ số tỉ lệ theo số hạt hoặc số mol, không bằng tỉ lệ khối lượng; ý d sai vì $H = (10,88 / 13,6) \\cdot 100\\% = 80\\%$." },
-        { id: "2.6", ctx: "Khi nghiên cứu về định luật bảo toàn khối lượng và phương trình hoá học:", sts: [{ l: "a)", t: "Phương trình hoá học biểu diễn ngắn gọn phản ứng hoá học bằng công thức hoá học của các chất.", a: true }, { l: "b)", t: "Sơ đồ phản ứng hoá học giữa khí hydrogen và khí oxygen khi được cân bằng đúng là: H2 + O2 → H2O.", a: false }, { l: "c)", t: "Nung nóng hoàn toàn 0,1 mol CaCO3 thì thu được 2,479 lít khí CO2 ở điều kiện 25 °C và 1 bar.", a: true }, { l: "d)", t: "Nung 10 g CaCO3, theo lí thuyết thu được 5,6 g CaO; nếu thực tế thu được 4,48 g CaO thì hiệu suất là 80%.", a: true }], e: "Ý b sai vì phương trình cân bằng đúng là $2H_2 + O_2 \\rightarrow 2H_2O$." },
-        { id: "2.7", ctx: "Xét khái niệm, đơn vị và công dụng của áp suất trên một bề mặt:", sts: [{ l: "a)", t: "Áp suất được tính bằng độ lớn của áp lực tác dụng lên một đơn vị diện tích bề mặt bị ép.", a: true }, { l: "b)", t: "Đơn vị đo áp suất trong hệ đo lường hợp pháp là niutơn trên mét vuông (N/m2) hay paxcan (Pa).", a: true }, { l: "c)", t: "Người làm vườn đóng một chiếc cọc có đầu vạt nhọn xuống đất sẽ khó hơn chiếc cọc đầu bằng phẳng.", a: false }, { l: "d)", t: "Đầu chiếc kim tiêm được mài thật nhọn nhằm làm giảm diện tích bị ép để tạo ra áp suất rất lớn khi đâm qua da.", a: true }], e: "Ý c sai vì cọc đầu vạt nhọn có diện tích tiếp xúc nhỏ, tạo áp suất lớn nên đóng xuống đất dễ dàng hơn." },
-        { id: "2.8", ctx: "Khi thảo luận về các hiện tượng thực tế liên quan đến áp lực và áp suất:", sts: [{ l: "a)", t: "Áp lực là lực tác dụng có phương song song với mặt phẳng tiếp xúc bị ép.", a: false }, { l: "b)", t: "Giá trị của 1 Pa tương đương với áp lực 1N tác dụng vuông góc lên diện tích bề mặt rộng 1m2.", a: true }, { l: "c)", t: "Đặt tấm ván gỗ ngang qua chỗ đất lầy lội để bước qua giúp làm tăng áp suất tác dụng lên mặt đất.", a: false }, { l: "d)", t: "Xe máy kéo nông nghiệp sử dụng bánh có bề mặt rộng và xích kim loại lớn để tránh bị lún sụt khi đi trên đồng ruộng.", a: true }], e: "Ý a sai vì áp lực có phương vuông góc với mặt tiếp xúc; ý c sai vì tấm ván giúp dàn đều tải trọng làm giảm áp suất." },
-        { id: "2.9", ctx: "Dựa vào công thức tính áp suất p=F/S và các ứng dụng kĩ thuật trong đời sống:", sts: [{ l: "a)", t: "Áp suất sinh ra khi có lực ép vuông góc tác dụng lên một diện tích bề mặt bị ép.", a: true }, { l: "b)", t: "Paxcan (Pa) là đơn vị đo duy nhất của áp suất và không thể chuyển đổi sang các đơn vị đo nào khác.", a: false }, { l: "c)", t: "Muốn làm giảm áp suất tác dụng lên mặt bị ép, ta có thể giữ nguyên áp lực và tăng diện tích mặt bị ép.", a: true }, { l: "d)", t: "Ống hút cắm vào các hộp sữa tươi luôn được thiết kế vát một đầu nhọn nhằm làm tăng áp suất để dễ cắm thủng màng giấy.", a: true }], e: "Ý b sai vì còn có các đơn vị khác như atm, mmHg, Bar..." },
-        { id: "2.10", ctx: "Khi làm các thí nghiệm khảo sát về áp suất chất lỏng và áp suất khí quyển:", sts: [{ l: "a)", t: "Khi lặn xuống bể bơi, ta cảm nhận màng nhĩ bị ép căng là một minh chứng về sự tồn tại của áp suất chất lỏng.", a: true }, { l: "b)", t: "Đập chắn nước ở các nhà máy thuỷ điện thường được xây dựng với chân đập dày hơn đỉnh đập vì áp suất chất lỏng tăng theo độ sâu.", a: true }, { l: "c)", t: "Khi khoét các lỗ nhỏ ở các vị trí đáy và xung quanh thành bình trụ chứa nước, nước chỉ chảy ra theo phương thẳng đứng từ lỗ ở đáy.", a: false }, { l: "d)", t: "Giác mút cao su dính chặt được vào mặt kính phẳng chứng tỏ không khí xung quanh tác dụng áp suất khí quyển lên nó.", a: true }], e: "Ý c sai vì chất lỏng gây áp suất theo mọi phương nên nước chảy ra từ cả đáy và các lỗ bên thành bình." },
-        { id: "2.11", ctx: "Tìm hiểu các hiện tượng về áp suất tác dụng trong lòng chất lỏng và khí quyển:", sts: [{ l: "a)", t: "Càng đưa bình trụ bịt màng cao su chìm sâu vào bể nước thì các màng cao su càng bị móp méo vào nhiều hơn.", a: true }, { l: "b)", t: "Nước trong một hồ chứa gây ra áp suất lên đáy hồ luôn nhỏ hơn áp suất tác dụng lên các điểm ở sát mặt hồ.", a: false }, { l: "c)", t: "Màng cao su bịt ở các lỗ bên thành bình chứa chất lỏng bị phồng ra chứng tỏ chất lỏng tác dụng áp suất theo mọi phương lên thành bình.", a: true }, { l: "d)", t: "Bình nước có vòi rót muốn chảy nước liên tục khi mở vòi thì nắp bình phải kín hoàn toàn và không được có lỗ thông khí.", a: false }], e: "Ý b sai vì đáy hồ có độ sâu lớn nhất nên áp suất lớn nhất; ý d sai vì bình nước cần có lỗ thông hơi để cân bằng áp suất ngoài thì nước mới chảy đều." },
-        { id: "2.12", ctx: "Vận dụng kiến thức về áp suất chất lỏng và áp suất không khí vào thực tế:", sts: [{ l: "a)", t: "Một quả bóng cao su bơm căng để chìm trong bể nước bị bóp méo chứng tỏ chất lỏng gây áp suất lên nó.", a: true }, { l: "b)", t: "Khi người thợ lặn càng lặn sâu xuống biển thì áp suất của nước biển tác dụng lên cơ thể người thợ lặn càng tăng.", a: true }, { l: "c)", t: "Một bình kín chứa đầy nước thì áp suất do nước tác dụng chỉ xuất hiện ở đáy bình chứ không tác dụng lên nắp bình.", a: false }, { l: "d)", t: "Úp ngược một cốc đầy nước được đậy kín bằng tấm nylon cứng, tấm nylon không bị rơi là bằng chứng về sự tồn tại của áp suất khí quyển.", a: true }], e: "Ý c sai vì áp suất chất lỏng truyền nguyên vẹn theo mọi hướng lên đáy, nắp và thành bình." },
-        { id: "2.13", ctx: "Khi nghiên cứu về tác dụng làm quay của lực và moment lực quanh một trục cố định:", sts: [{ l: "a)", t: "Chuyển động quay của cánh cửa lớp học quanh bản lề cố định là một ví dụ về chuyển động quay của vật rắn quanh một trục.", a: true }, { l: "b)", t: "Chuyển động quay của bánh xe đạp quanh trục bánh xe là một ví dụ về chuyển động quay của vật rắn quanh một trục cố định.", a: true }, { l: "c)", t: "Một toa tàu hoả đang chuyển động thẳng đều trên đường ray là một ví dụ về chuyển động quay quanh trục cố định.", a: false }, { l: "d)", t: "Dùng cờ-lê có cán dài để nới lỏng ốc vít bị kẹt sẽ khó khăn và tốn nhiều sức hơn so với khi dùng cờ-lê cán ngắn.", a: false }], e: "Ý c là chuyển động tịnh tiến; ý d sai vì cờ-lê cán dài tăng moment lực giúp mở ốc dễ dàng và ít tốn sức hơn." },
-        { id: "2.14", ctx: "Xét các trường hợp lực làm vật rắn quay quanh trục và quy tắc sử dụng dụng cụ:", sts: [{ l: "a)", t: "Chiếc quạt trần đang quay đều quanh trục treo thẳng đứng là ví dụ về chuyển động quay của vật rắn quanh trục cố định.", a: true }, { l: "b)", t: "Chuyển động của chiếc kim đồng hồ quay quanh trục ở mặt số là ví dụ về vật rắn chuyển động quay quanh một trục cố định.", a: true }, { l: "c)", t: "Chuyển động của quả táo rơi tự do từ trên cành cây xuống đất là một ví dụ về vật rắn quay quanh trục cố định.", a: false }, { l: "d)", t: "Để vặn ốc một cách dễ dàng, ta nên đặt tay cầm ở vị trí gần sát trục ốc để giảm khoảng cách đến trục quay.", a: false }], e: "Ý c là chuyển động rơi thẳng; ý d sai vì đặt tay gần sát trục làm giảm cánh tay đòn, moment lực nhỏ sẽ khó vặn hơn." },
-        { id: "2.15", ctx: "Khảo sát moment lực tác dụng lên các vật có trục quay cố định trong đời sống:", sts: [{ l: "a)", t: "Thao tác đóng hoặc mở nắp chiếc máy tính xách tay là ví dụ về chuyển động quay quanh một trục cố định của vật rắn.", a: true }, { l: "b)", t: "Chuyển động của cánh tay đòn trong chiếc ba-ri-e chắn đường tàu là ví dụ về vật rắn quay quanh một trục cố định.", a: true }, { l: "c)", t: "Chuyển động của cánh tay gạt nước trên kính chắn gió ô tô là ví dụ về chuyển động quay quanh trục cố định của vật rắn.", a: true }, { l: "d)", t: "Muốn vặn chặt một con ốc lớn bị chặt, người thợ cơ khí thường chọn chiếc cờ-lê dài để làm tăng moment lực.", a: true }], e: "Cả 4 nhận định a, b, c, d đều đúng theo kiến thức về chuyển động quay và tác dụng làm quay của lực." }
+    "tf": [
+        {
+            "id": "2.1",
+            "ctx": "Về thời lượng giáo dục AI cốt lõi theo chỉ đạo của Bộ GDĐT:",
+            "sts": [
+                {
+                    "l": "a)",
+                    "t": "Nội dung cốt lõi dành cho mọi học sinh.",
+                    "a": true
+                },
+                {
+                    "l": "b)",
+                    "t": "Mỗi lớp thực hiện 12 tiết/năm học đối với nội dung cốt lõi.",
+                    "a": true
+                },
+                {
+                    "l": "c)",
+                    "t": "Thời lượng lồng ghép trong các môn học được tính vào 12 tiết.",
+                    "a": false
+                },
+                {
+                    "l": "d)",
+                    "t": "Nội dung mở rộng được tổ chức trong 12 tiết cốt lõi.",
+                    "a": false
+                }
+            ],
+            "e": "Ý c sai: thời lượng lồng ghép không được tính vào 12 tiết. Ý d sai: nội dung mở rộng được tổ chức ngoài 12 tiết."
+        },
+        {
+            "id": "2.2",
+            "ctx": "Về cách tổ chức 12 tiết giáo dục AI trong nhà trường:",
+            "sts": [
+                {
+                    "l": "a)",
+                    "t": "Chuyên đề được bố trí trong kế hoạch dạy học 2 buổi/ngày.",
+                    "a": true
+                },
+                {
+                    "l": "b)",
+                    "t": "12 tiết của mỗi lớp được ghi rõ trong kế hoạch giáo dục và thời khoá biểu của nhà trường.",
+                    "a": true
+                },
+                {
+                    "l": "c)",
+                    "t": "Nên xếp dồn nhiều tiết giáo dục AI vào cùng một buổi học.",
+                    "a": false
+                },
+                {
+                    "l": "d)",
+                    "t": "Thiếu thiết bị là lí do được phép chậm triển khai giáo dục AI.",
+                    "a": false
+                }
+            ],
+            "e": "Ý c sai: không xếp dồn nhiều tiết giáo dục AI trong cùng một buổi. Ý d sai: thiếu thiết bị không phải là lí do để chậm triển khai."
+        },
+        {
+            "id": "2.3",
+            "ctx": "Về đánh giá kết quả giáo dục AI:",
+            "sts": [
+                {
+                    "l": "a)",
+                    "t": "Đánh giá quá trình giữ vai trò chủ đạo.",
+                    "a": true
+                },
+                {
+                    "l": "b)",
+                    "t": "Khung 2422 quy định đầu điểm riêng cho nội dung giáo dục AI.",
+                    "a": false
+                },
+                {
+                    "l": "c)",
+                    "t": "Đánh giá định kì có thể thực hiện qua bài thực hành, xử lí tình huống, dự án nhỏ hoặc sản phẩm.",
+                    "a": true
+                },
+                {
+                    "l": "d)",
+                    "t": "Nhà trường phải tổ chức bài kiểm tra định kì riêng cho nội dung giáo dục AI.",
+                    "a": false
+                }
+            ],
+            "e": "Ý b sai: Khung không quy định bài kiểm tra, bài thi hoặc đầu điểm riêng. Ý d sai: không tổ chức bài kiểm tra định kì riêng."
+        },
+        {
+            "id": "2.4",
+            "ctx": "Về nội dung giáo dục AI mở rộng:",
+            "sts": [
+                {
+                    "l": "a)",
+                    "t": "Do cơ sở giáo dục chủ động lựa chọn, phù hợp nhu cầu và năng lực của học sinh.",
+                    "a": true
+                },
+                {
+                    "l": "b)",
+                    "t": "Có thể tổ chức qua câu lạc bộ, dự án, hoạt động trải nghiệm hoặc ngoại khoá.",
+                    "a": true
+                },
+                {
+                    "l": "c)",
+                    "t": "Kết quả nội dung mở rộng được đánh giá, ghi nhận riêng.",
+                    "a": true
+                },
+                {
+                    "l": "d)",
+                    "t": "Nội dung mở rộng được phép thay thế 12 tiết cốt lõi.",
+                    "a": false
+                }
+            ],
+            "e": "Ý d sai: nội dung mở rộng không thay thế và không làm giảm yêu cầu thực hiện nội dung cốt lõi."
+        },
+        {
+            "id": "2.5",
+            "ctx": "Về phương án gợi ý phân bổ nội dung cốt lõi cấp trung học cơ sở (mỗi lớp 12 tiết):",
+            "sts": [
+                {
+                    "l": "a)",
+                    "t": "Lớp 6 gồm 7 chủ đề/bài học.",
+                    "a": true
+                },
+                {
+                    "l": "b)",
+                    "t": "Lớp 7, lớp 8 và lớp 9 mỗi lớp gồm 8 chủ đề/bài học.",
+                    "a": true
+                },
+                {
+                    "l": "c)",
+                    "t": "Toàn cấp trung học cơ sở có 31 bài, 48 tiết.",
+                    "a": true
+                },
+                {
+                    "l": "d)",
+                    "t": "Cách chia bài là quy định cứng, nhà trường không được điều chỉnh.",
+                    "a": false
+                }
+            ],
+            "e": "Ý d sai: đây là phương án gợi ý; nhà trường có thể điều chỉnh cách chia bài và thứ tự nhưng phải đủ yêu cầu cốt lõi và 12 tiết."
+        }
     ],
-    short: [
-        { id: "3.1", q: "Cho 20 gam đường saccharose hòa tan hoàn toàn vào 180 gam nước cất để tạo thành dung dịch nước đường. Tính nồng độ phần trăm của dung dịch nước đường thu được.", a: "10", e: "Khối lượng dung dịch = 20 + 180 = 200 g. Nồng độ phần trăm: $C\\% = \\frac{20}{200} \\cdot 100\\% = 10\\%$." },
-        { id: "3.2", q: "Biết độ tan của muối ăn (NaCl) trong nước ở 20 °C là 36 gam/100 gam nước. Để hòa tan hết 18 gam NaCl tạo thành dung dịch bão hòa ở 20 °C thì cần dùng vừa đúng bao nhiêu gam nước cất?", a: "50", e: "$m_{H_2O} = \\frac{18 \\cdot 100}{36} = 50\\text{ g}$." },
-        { id: "3.3", q: "Hòa tan hoàn toàn 0,15 mol muối CuSO4 vào nước thu được vừa đủ 500 mL dung dịch. Tính nồng độ mol của dung dịch CuSO4 thu được (biểu diễn theo đơn vị M).", a: "0,3", e: "Đổi $500\\text{ mL} = 0,5\\text{ L}$. Nồng độ mol: $C_M = \\frac{n}{V} = \\frac{0,15}{0,5} = 0,3\\text{ M}$." },
-        { id: "3.4", q: "Cho sơ đồ phản ứng hóa học giữa kẽm và hydrochloric acid: Zn + 2HCl → ZnCl2 + H2. Khi cho 0,2 mol Zn phản ứng hoàn toàn với dung dịch HCl dư, số mol khí H2 sinh ra là bao nhiêu mol?", a: "0,2", e: "Theo phương trình hóa học, $n_{H_2} = n_{Zn} = 0,2\\text{ mol}$." },
-        { id: "3.5", q: "Đốt cháy hoàn toàn 2,4 gam carbon trong khí oxygen dư tạo thành khí carbon dioxide theo phương trình hóa học: C + O2 → CO2. Biết khối lượng mol của carbon là 12 g/mol, khối lượng mol của CO2 là 44 g/mol, khối lượng khí CO2 thu được là bao nhiêu gam?", a: "8,8", e: "$n_C = \\frac{2,4}{12} = 0,2\\text{ mol} \\Rightarrow m_{CO_2} = 0,2 \\cdot 44 = 8,8\\text{ g}$." },
-        { id: "3.6", q: "Giả sử tiến hành nung đá vôi chứa calcium carbonate theo phương trình: CaCO3 → CaO + CO2. Theo tính toán lí thuyết thu được 10 gam vôi sống (CaO), nhưng khi cân thực tế chỉ thu được 8,5 gam CaO. Tính hiệu suất của phản ứng nung vôi trên (biểu diễn theo đơn vị %)?", a: "85", e: "Hiệu suất: $H = \\frac{m_{tt}}{m_{lt}} \\cdot 100\\% = \\frac{8,5}{10} \\cdot 100\\% = 85\\%$." },
-        { id: "3.7", q: "Đặt một khối kim loại có trọng lượng F=400N lên mặt bàn nằm ngang. Biết diện tích bề mặt tiếp xúc của khối kim loại với mặt bàn là S=0,2m2. Tính áp suất do khối kim loại tác dụng lên mặt bàn theo đơn vị kilôpaxcan (kPa).", a: "2", e: "$p = \\frac{F}{S} = \\frac{400}{0,2} = 2000\\text{ Pa} = 2\\text{ kPa}$." },
-        { id: "3.8", q: "Cho các biện pháp kỹ thuật và đời sống sau đây: (1) Mài thật sắc lưỡi dao để thái thịt dễ dàng. (2) Tấm ván gỗ đặt trên bùn lầy để người đi qua không bị lún. (3) Bánh xe máy kéo nông nghiệp có bản xích rất rộng. (4) Đóng cọc tre có đầu vót thật nhọn xuống lòng đất. (5) Giảm diện tích mặt tiếp xúc của mũi đột thép để đục lỗ tấm tôn. (6) Đầu ghim bảng được vuốt thật nhọn. (7) Móng nhà được mở rộng đáy so với phần tường phía trên. (8) Đế giày trượt tuyết được thiết kế dạng bản phẳng to dài. Hãy chọn các biện pháp nhằm mục đích làm giảm áp suất tác dụng lên bề mặt bị ép rồi ghi đáp án bằng một dãy số tăng dần từ nhỏ đến lớn.", a: "2378", e: "Các biện pháp làm giảm áp suất (bằng cách tăng diện tích tiếp xúc) là: (2), (3), (7), (8). Dãy số tăng dần: 2378." },
-        { id: "3.9", q: "Một người công nhân dùng chiếc đột kim loại để đột lỗ trên tấm tôn. Lực ép tác dụng lên đột là F=300N. Để mũi đột tác dụng lên mặt tấm tôn một áp suất bằng 1,5⋅107Pa, diện tích tiếp xúc của đầu mũi đột phải bằng bao nhiêu milimét vuông (mm2)?", a: "20", e: "$S = \\frac{F}{p} = \\frac{300}{1,5 \\cdot 10^7} = 2 \\cdot 10^{-5}\\text{ m}^2 = 20\\text{ mm}^2$." },
-        { id: "3.10", q: "Đặt một chiếc hộp hình lập phương rỗng kín chìm hoàn toàn trong một bể nước sâu. Trong số các mặt của hình hộp (mặt trên, mặt đáy và 4 mặt bên), có bao nhiêu mặt chịu tác dụng của áp suất do nước gây ra?", a: "6", e: "Chất lỏng tác dụng áp suất theo mọi phương, do đó cả 6 mặt của hộp hình lập phương đều chịu tác dụng của áp suất nước." },
-        { id: "3.11", q: "Hai điểm A và B nằm trong cùng một hồ nước tĩnh, điểm A ở độ sâu 1,5 m và điểm B ở độ sâu 6,0 m tính từ mặt thoáng của hồ nước. Biết áp suất chất lỏng tỉ lệ thuận với độ sâu cột chất lỏng, áp suất chất lỏng tại điểm B gấp bao nhiêu lần áp suất chất lỏng tại điểm A?", a: "4", e: "Tỉ số áp suất: $\\frac{p_B}{p_A} = \\frac{h_B}{h_A} = \\frac{6,0}{1,5} = 4$ lần." },
-        { id: "3.12", q: "Cho các hiện tượng và thiết bị thực tế sau đây: (1) Ống đong chứa nước làm màng cao su ở đáy và thành bình biến dạng căng ra. (2) Giác mút cao su bám chặt vào bề mặt kính phẳng sau khi ấn ép. (3) Nước trong bình có vòi chỉ chảy đều ra ngoài khi trên nắp bình có một lỗ thông hơi nhỏ. (4) Thợ lặn càng xuống sâu càng cảm nhận tức ngực do nước ép vào cơ thể. (5) Dùng ống hút cắm vào hộp sữa kín có thể hút sữa lên miệng. (6) Cắm nhiệt kế đo nhiệt độ nóng chảy của nước đá. (7) Úp ngược cốc nước đậy tấm bìa cứng không thấm nước thì tấm bìa không bị rơi. (8) Đập chắn nước thuỷ điện chịu lực ép của nước lớn nhất ở chân đập. Hãy chọn các hiện tượng, ứng dụng chứng tỏ sự tồn tại của áp suất khí quyển rồi ghi đáp án bằng một dãy số tăng dần từ nhỏ đến lớn.", a: "2357", e: "Các hiện tượng, ứng dụng chứng tỏ sự tồn tại của áp suất khí quyển là: (2), (3), (5), (7). Dãy số tăng dần: 2357." },
-        { id: "3.13", q: "Cho các chuyển động của các vật sau đây: (1) Cánh quạt trần đang quay đều quanh trục động cơ gắn cố định trên trần nhà. (2) Bánh xe ô tô đang chuyển động quay quanh trục bánh xe khi xe chạy trên đường. (3) Viên bi lăn thẳng đều trên một máng nghiêng dài. (4) Cánh cửa lớp học quay quanh trục bản lề cố định khi đóng mở. (5) Chiếc kim của đồng hồ treo tường quay đều quanh trục ở tâm mặt số. (6) Quả táo rơi tự do từ cành cây cao thẳng đứng xuống mặt đất. (7) Cánh tay của chiếc barie chắn đường tàu quay nâng lên hạ xuống quanh chốt xoay. (8) Thùng hàng đang trượt thẳng trên mặt sàn phẳng. Hãy chọn các chuyển động là chuyển động quay của vật rắn quanh một trục cố định rồi ghi đáp án bằng một dãy số tăng dần từ nhỏ đến lớn.", a: "1457", e: "Các chuyển động quay của vật rắn quanh một trục cố định là: (1), (4), (5), (7). Dãy số tăng dần: 1457." },
-        { id: "3.14", q: "Khi xét tác dụng làm quay của một lực tác dụng vào một cánh cửa có trục quay đi qua các bản lề: (1) Lực có giá cắt trục quay làm cánh cửa quay nhanh hơn. (2) Lực có giá song song với trục quay không làm cánh cửa quay quanh trục. (3) Lực có giá không song song và không cắt trục quay sẽ làm quay cánh cửa. (4) Lực tác dụng vuông góc vào tay nắm cửa ở xa bản lề làm mở cửa dễ nhất. (5) Đặt tay càng sát bản lề để đẩy cửa thì lực cần tác dụng càng nhỏ. (6) Lực kéo hướng dọc theo chiều dài cánh cửa cắt trục quay làm cửa quay dễ dàng. (7) Moment lực là đại lượng đặc trưng cho tác dụng làm quay của lực. (8) Lực càng lớn và giá của lực càng gần trục quay thì tác dụng làm quay càng lớn. Hãy chọn các nhận định đúng rồi ghi đáp án bằng một dãy số tăng dần từ nhỏ đến lớn.", a: "2347", e: "Các nhận định đúng về tác dụng làm quay quanh bản lề là: (2), (3), (4), (7). Dãy số tăng dần: 2347." },
-        { id: "3.15", q: "Một người thợ dùng cờ lê có chiều dài cán d1=20cm để vặn một đai ốc. Do ốc quá chặt, người thợ đổi sang dùng chiếc cờ lê cùng loại nhưng có cán dài d2=40cm và tác dụng lực vuông góc vào đầu cán. Nếu tác dụng cùng một độ lớn lực thì moment của lực khi dùng chiếc cờ lê thứ hai gấp bao nhiêu lần so với chiếc cờ lê thứ nhất?", a: "2", e: "Tỉ số moment lực: $\\frac{M_2}{M_1} = \\frac{F \\cdot d_2}{F \\cdot d_1} = \\frac{40}{20} = 2$ lần." },
-        { id: "3.16", q: "Tính khối lượng chất tan hydrochloric acid (HCl) có trong 50 gam dung dịch HCl nồng độ 7,3% (kết quả biểu diễn chính xác đến một chữ số thập phân).", a: "3,65", e: "$m_{HCl} = \\frac{50 \\cdot 7,3}{100} = 3,65\\text{ g}$." },
-        { id: "3.17", q: "Cho sơ đồ phản ứng hóa học: 2Al + 6HCl → 2AlCl3 + 3H2. Cần dùng bao nhiêu mol kim loại nhôm (Al) để phản ứng vừa đủ với dung dịch chứa 0,6 mol HCl?", a: "0,2", e: "Theo phương trình: $n_{Al} = \\frac{2}{6} \\cdot n_{HCl} = \\frac{1}{3} \\cdot 0,6 = 0,2\\text{ mol}$." },
-        { id: "3.18", q: "Khi dùng cờ lê để tháo một ốc vít bị gỉ sét khó vặn, cách làm nào sau đây giúp tăng moment lực để vặn ốc dễ dàng nhất? (1) Cầm tay sát vào đầu chụp của ốc vít để vặn. (2) Nối thêm một đoạn ống thép vào cán cờ lê để tăng chiều dài cánh tay đòn. (3) Tác dụng lực có phương cắt ngang qua trục quay của ốc. (4) Tác dụng lực vuông góc ở vị trí xa nhất trên cán cờ lê. (5) Dùng búa gõ nhẹ vào đầu cờ lê theo phương vuông góc với cán. (6) Đẩy lực theo hướng song song với thân ốc vít. (7) Giảm độ lớn của lực kéo tác dụng lên cán cờ lê. (8) Thay bằng cờ lê có cán ngắn hơn một nửa. Hãy chọn các biện pháp đúng rồi ghi đáp án bằng một dãy số tăng dần từ nhỏ đến lớn.", a: "245", e: "Các biện pháp đúng giúp tăng moment lực hoặc lực quay tháo ốc là: (2), (4), (5). Dãy số tăng dần: 245." }
+    "short": [
+        {
+            "id": "3.1",
+            "q": "Mỗi lớp thực hiện bao nhiêu tiết giáo dục AI nội dung cốt lõi trong một năm học?",
+            "a": "12",
+            "e": "Nội dung cốt lõi: 12 tiết/lớp/năm học."
+        },
+        {
+            "id": "3.2",
+            "q": "Cấp trung học cơ sở (lớp 6, 7, 8, 9) có tổng cộng bao nhiêu tiết nội dung cốt lõi giáo dục AI?",
+            "a": "48",
+            "e": "4 lớp × 12 tiết = 48 tiết (toàn cấp THCS có 31 bài, 48 tiết)."
+        },
+        {
+            "id": "3.3",
+            "q": "Phương án gợi ý cho cấp trung học cơ sở có tổng cộng bao nhiêu bài học (lớp 6: 7 bài; lớp 7–9: 8 bài/lớp)?",
+            "a": "31",
+            "e": "7 + 8 + 8 + 8 = 31 bài."
+        },
+        {
+            "id": "3.4",
+            "q": "Nếu rải đều 12 tiết giáo dục AI trong năm học thì khoảng bao nhiêu tuần học 1 tiết?",
+            "a": "3",
+            "e": "Cách (1): rải đều, khoảng 1 tiết trong 3 tuần suốt năm học."
+        },
+        {
+            "id": "3.5",
+            "q": "Cấp trung học cơ sở có bao nhiêu yêu cầu cần đạt cốt lõi được gắn với các bài của phương án 12 tiết?",
+            "a": "60",
+            "e": "60 yêu cầu cần đạt cốt lõi của cấp THCS đều được gắn với một bài của đúng lớp; không có yêu cầu mở rộng (MR) nào đưa vào 12 tiết."
+        },
+        {
+            "id": "3.6",
+            "q": "Khung năng lực số theo Thông tư 02/2025/TT-BGDĐT gồm bao nhiêu miền năng lực?",
+            "a": "6",
+            "e": "Khung NLS gồm 6 miền năng lực, 24 năng lực thành phần, 4 trình độ, 8 bậc."
+        }
     ]
 };
 
 const ALL_BANKS = {
-    "khtn8_gk1": QUESTION_BANK
+    "khtn9_gk1": QUESTION_BANK
 };
 
-// Thuật toán chọn bộ câu hỏi không trùng lặp lần làm gần nhất
+// =========================================================================
+// THUẬT TOÁN CHỌN BỘ CÂU HỎI KHÔNG TRÙNG LẶP VỚI LẦN GẦN NHẤT
+// =========================================================================
 function selectUniqueQuestions(bankList, targetCount, storageKey) {
     let lastUsedIds = [];
     try {
@@ -691,18 +1037,18 @@ function autoScaleApp() {
         container.style.transform = `scale(1)`; wrapper.style.height = `${windowHeight}px`; wrapper.style.overflow = 'hidden'; 
     }
 }
-window.addEventListener('resize', autoScaleApp); autoScaleApp();
+window.addEventListener('resize', autoScaleApp); window.addEventListener('orientationchange', () => setTimeout(autoScaleApp, 300)); autoScaleApp();
 
 document.addEventListener('copy', (e) => { e.preventDefault(); return false; });
 
 const closeOverlay = (modal) => {
     modal.style.display = 'none';
-    if (modal.id === 'delete-auth-modal') { pendingAuthAction = null; currentDeleteId = null; importedStudentsCache = []; document.getElementById('delete-pw').value = ''; document.getElementById('delete-email').value = ''; document.getElementById('file-import-students').value = ''; }
+    if (modal.id === 'delete-auth-modal') { pendingAuthAction = null; currentDeleteId = null; importedStudentsCache = []; document.getElementById('delete-pw').value = ''; document.getElementById('delete-email').value = ''; document.getElementById('delete-adv').value = ''; document.getElementById('file-import-students').value = ''; }
     if (modal.id === 'admin-auth-modal') { document.getElementById('admin-pw').value = ''; }
 };
 
 document.addEventListener('keydown', (e) => {
-    if ((e.ctrlKey && (e.key === 'c' || e.key === 'v' || e.key === 'x' || e.key === 'u' || e.key === 's'))) {
+    if (((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'v' || e.key === 'x' || e.key === 'u' || e.key === 's'))) {
         e.preventDefault(); return false;
     }
     if (e.key === 'Escape') {
@@ -759,7 +1105,7 @@ document.addEventListener('paste', function(e) {
     }
 });
 
-// AUTOCOMPLETE HỌC SINH
+// AUTOCOMPLETE LOGIC
 function autocomplete(inp, arr) {
     let currentFocus;
     inp.addEventListener("input", function(e) {
@@ -836,6 +1182,7 @@ function autocomplete(inp, arr) {
     document.addEventListener("click", function (e) { closeAllLists(e.target); });
 }
 
+// TOGGLE GUEST MODE
 document.getElementById('guest-mode-toggle').addEventListener('change', function(e) {
     const isGuest = e.target.checked;
     const classInp = document.getElementById("user_class");
@@ -844,7 +1191,7 @@ document.getElementById('guest-mode-toggle').addEventListener('change', function
     const nameInp = document.getElementById("username");
     
     if (isGuest) {
-        classInp.removeAttribute("readonly"); classInp.value = ""; classInp.placeholder = "Ví dụ: 8/1";
+        classInp.removeAttribute("readonly"); classInp.value = ""; classInp.placeholder = "Ví dụ: 9/1";
         sbdInp.removeAttribute("readonly"); sbdInp.value = ""; sbdInp.placeholder = "Ví dụ: 01";
         schoolInp.removeAttribute("readonly"); schoolInp.value = ""; schoolInp.placeholder = "Nhập tên trường";
         nameInp.value = ""; nameInp.placeholder = "Nhập họ và tên...";
@@ -867,7 +1214,7 @@ async function loadStudentList() {
     try {
         const snap = await getDocs(collection(db, 'artifacts', appId_fixed, 'public', 'data', collectionStudents));
         globalStudentList = [];
-        snap.forEach(d => globalStudentList.push({id: d.id, ...d.data()}));
+        snap.forEach(d => { const data = d.data(); if (data.projectId === projectId) globalStudentList.push({id: d.id, ...data}); });
         if(!document.getElementById('guest-mode-toggle').checked) {
             autocomplete(document.getElementById("username"), globalStudentList);
         }
@@ -930,14 +1277,14 @@ function checkShortAns(u, a) {
     let cleanA = (a||"").toString().replace(/\s+/g, '').replace(/,/g, '.');
     if (cleanU === cleanA) return true;
     if (!isNaN(cleanU) && !isNaN(cleanA) && cleanU !== '' && cleanA !== '') {
-        return Number(cleanU) === Number(cleanA);
+        return Math.abs(Number(cleanU) - Number(cleanA)) < 0.05;
     }
     return false;
 }
 
 async function loadTimeConfig() {
     try {
-        const docRef = await getDoc(doc(db, 'artifacts', appId_fixed, 'public', 'data', 'config', 'timer_settings'));
+        const docRef = await getDoc(doc(db, 'artifacts', appId_fixed, 'public', 'data', 'config', `timer_settings_${projectId}`));
         if(docRef.exists()) {
             const data = docRef.data();
             practiceTimeLimit = (data.practice || 45) * 60; testTimeLimit = (data.test || 45) * 60; maxHintsAllowed = data.maxHints !== undefined ? data.maxHints : 3;
@@ -973,15 +1320,15 @@ const initGame = (m) => {
     
     const activeBank = ALL_BANKS[topicVal] || QUESTION_BANK;
 
-    // LẤY NGẪU NHIÊN 18 CÂU MCQ, 8 CÂU TF, 6 CÂU SHORT (ƯU TIÊN KHÁC LẦN GẦN NHẤT)
-    const pickedMcq = selectUniqueQuestions(activeBank.mcq, 18, 'last_picked_mcq_ids_khtn8');
-    const pickedTf = selectUniqueQuestions(activeBank.tf, 8, 'last_picked_tf_ids_khtn8');
-    const pickedShort = selectUniqueQuestions(activeBank.short, 6, 'last_picked_short_ids_khtn8');
+    // BỐC ĐỀ CHUẨN THANG 10: 18 MCQ + 8 TF + 6 SHORT (Ưu tiên câu chưa thi ở lần gần nhất)
+    const pickedMcq = selectUniqueQuestions(activeBank.mcq, 18, 'last_picked_mcq_ids_khtn9');
+    const pickedTf = selectUniqueQuestions(activeBank.tf, 8, 'last_picked_tf_ids_khtn9');
+    const pickedShort = selectUniqueQuestions(activeBank.short, 6, 'last_picked_short_ids_khtn9');
 
     let qNum = 1;
-    pickedMcq.forEach(q => currentExam.push({...q, id: `q_${qNum}`, type: 'mcq', section: 'Phần I. Trắc nghiệm khách quan dạng Đa lựa chọn (18 câu - 4,5 điểm)', displayNum: qNum++}));
-    pickedTf.forEach(q => currentExam.push({...q, id: `q_${qNum}`, type: 'tf', section: 'Phần II. Trắc nghiệm khách quan dạng Đúng/Sai (8 câu - 4,0 điểm)', displayNum: qNum++}));
-    pickedShort.forEach(q => currentExam.push({...q, id: `q_${qNum}`, type: 'short', section: 'Phần III. Trắc nghiệm khách quan dạng Trả lời ngắn (6 câu - 1,5 điểm)', displayNum: qNum++}));
+    pickedMcq.forEach(q => currentExam.push({...q, id: `q_${qNum}`, type: 'mcq', section: 'Phần I. Trắc nghiệm khách quan dạng Đa lựa chọn (18 câu)', displayNum: qNum++}));
+    pickedTf.forEach(q => currentExam.push({...q, id: `q_${qNum}`, type: 'tf', section: 'Phần II. Trắc nghiệm khách quan dạng Đúng/Sai (8 câu)', displayNum: qNum++}));
+    pickedShort.forEach(q => currentExam.push({...q, id: `q_${qNum}`, type: 'short', section: 'Phần III. Trắc nghiệm khách quan dạng Trả lời ngắn (6 câu)', displayNum: qNum++}));
 
     userAnswers = {}; currentIdx = 0; timeLeft = (mode === 'test') ? testTimeLimit : practiceTimeLimit;
     const elTimer = document.getElementById('timer'); if(elTimer) { elTimer.innerText = `${Math.floor(timeLeft/60)}:${(timeLeft%60).toString().padStart(2,'0')}`; }
@@ -1030,15 +1377,15 @@ function renderQuestion() {
     } else {
         html += `<h3>Câu ${q.displayNum}. ${q.q}</h3>`;
         const currentVal = (userAnswers[q.id] || "").padEnd(4, " ");
-        html += `<div class="short-answer-wrapper"><input type="text" class="char-slot" maxlength="1" value="${currentVal[0] !== ' ' ? currentVal[0] : ''}" data-idx="0"><input type="text" class="char-slot" maxlength="1" value="${currentVal[1] !== ' ' ? currentVal[1] : ''}" data-idx="1"><input type="text" class="char-slot" maxlength="1" value="${currentVal[2] !== ' ' ? currentVal[2] : ''}" data-idx="2"><input type="text" class="char-slot" maxlength="1" value="${currentVal[3] !== ' ' ? currentVal[3] : ''}" data-idx="3"></div><p style="color:var(--danger); font-size:0.8rem; font-weight:bold; text-align:center;">Lưu ý: Đối với câu chọn nhận định đúng, nhập dãy số tăng dần vào các ô từ TRÁI sang PHẢI. Đối với câu tính toán, nhập kết quả số.</p>`;
+        html += `<div class="short-answer-wrapper"><input type="text" class="char-slot" maxlength="1" value="${currentVal[0] !== ' ' ? currentVal[0] : ''}" data-idx="0"><input type="text" class="char-slot" maxlength="1" value="${currentVal[1] !== ' ' ? currentVal[1] : ''}" data-idx="1"><input type="text" class="char-slot" maxlength="1" value="${currentVal[2] !== ' ' ? currentVal[2] : ''}" data-idx="2"><input type="text" class="char-slot" maxlength="1" value="${currentVal[3] !== ' ' ? currentVal[3] : ''}" data-idx="3"></div><p style="color:var(--danger); font-size:0.8rem; font-weight:bold; text-align:center;">Lưu ý: Đối với câu số hãy điền trực tiếp giá trị; đối với câu nhận định hãy điền dãy số tăng dần từ trái sang phải.</p>`;
     }
     container.innerHTML = html + `</div>`;
     if(q.type === 'mcq') {
-        container.querySelectorAll('.option').forEach(el => el.onclick = () => { userAnswers[q.id] = el.getAttribute('data-ans'); audioPing.play().catch(()=>{}); renderQuestion(); });
+        container.querySelectorAll('.option').forEach(el => el.onclick = () => { userAnswers[q.id] = el.getAttribute('data-ans'); safePlay(audioPing); renderQuestion(); });
     } else if(q.type === 'tf') {
         container.querySelectorAll('.tf-btn').forEach(el => el.onclick = () => {
             const si = el.getAttribute('data-si'), val = el.getAttribute('data-val') === 'true';
-            if(!userAnswers[q.id]) userAnswers[q.id] = {}; userAnswers[q.id][si] = val; audioPing.play().catch(()=>{}); renderQuestion();
+            if(!userAnswers[q.id]) userAnswers[q.id] = {}; userAnswers[q.id][si] = val; safePlay(audioPing); renderQuestion();
         });
     } else {
         const slots = container.querySelectorAll('.char-slot');
@@ -1067,15 +1414,15 @@ function renderQuestion() {
     if(window.MathJax) MathJax.typesetPromise().then(autoScaleApp); else setTimeout(autoScaleApp, 50);
 }
 
-// TÍNH ĐIỂM CHUẨN THANG 10 THEO YÊU CẦU:
-// - 18 câu MCQ: 18 * 0.25đ = 4.5đ
-// - 8 câu Đúng/Sai: mỗi câu tối đa 0.5đ (1 ý: 0.05, 2 ý: 0.125, 3 ý: 0.25, 4 ý: 0.5) -> 8 * 0.5đ = 4.0đ
+// TÍNH ĐIỂM CHUẨN THANG 10 THEO MA TRẬN:
+// - 18 câu Đa lựa chọn: 18 * 0.25đ = 4.5đ
+// - 8 câu Đúng/Sai: mỗi câu tối đa 0.5đ (1 ý: 0.05đ, 2 ý: 0.125đ, 3 ý: 0.25đ, 4 ý: 0.5đ) -> 8 * 0.5đ = 4.0đ
 // - 6 câu Trả lời ngắn: mỗi câu 0.25đ -> 6 * 0.25đ = 1.5đ
 // Tổng cộng = 4.5 + 4.0 + 1.5 = 10.0 điểm
 async function calculateResult() {
     if (hasSaved) return; if(!isQuizRunning && !isProcessingCheat) return; hasSaved = true;
     if(wishTimeoutId) clearTimeout(wishTimeoutId);
-    isQuizRunning = false; canCheckCheat = false; clearInterval(timerInt); audioFinish.play().catch(()=>{});
+    isQuizRunning = false; canCheckCheat = false; clearInterval(timerInt); safePlay(audioFinish);
     document.getElementById('btn-report-open').style.display = 'block'; document.getElementById('btn-admin-open').style.display = 'block';
     const dur = Math.floor((Date.now() - quizStartTime) / 1000); let score = 0; 
     const pMCQ = 0.25;
@@ -1102,7 +1449,7 @@ async function calculateResult() {
     if(currentUser) {
         try { 
             await addDoc(collection(db, 'artifacts', appId_fixed, 'public', 'data', collectionName), { 
-                name: u.name, school: u.sch, sbd: u.sbd, class: u.cls, topic: u.topic, score: fs, duration: dur, mode: mode, timestamp: new Date().toISOString(), examData: currentExam, userAnswers: userAnswers 
+                projectId, name: u.name, school: u.sch, sbd: u.sbd, class: u.cls, topic: u.topic, score: fs, duration: dur, mode: mode, timestamp: new Date().toISOString(), examData: currentExam, userAnswers: userAnswers 
             }); 
         } catch(e) { hasSaved = false; }
     }
@@ -1112,7 +1459,7 @@ async function calculateResult() {
 async function fetchRankAndLeaderboard(myScore, myTopic) {
     try {
         const snap = await getDocs(collection(db, 'artifacts', appId_fixed, 'public', 'data', collectionName));
-        let list = []; snap.forEach(d => list.push(d.data()));
+        let list = []; snap.forEach(d => { const data = d.data(); if (data.projectId === projectId) list.push(data); });
         list = list.filter(r => (r.mode === 'test' || !r.mode) && r.topic === myTopic); 
         list.sort((a,b) => b.score - a.score || a.duration - b.duration);
         const myRank = list.findIndex(r => r.name === window.finalUserData.name && r.score === myScore) + 1;
@@ -1125,7 +1472,7 @@ async function renderAdmin() {
     listBody.innerHTML = "<tr><td colspan='11'>Đang tải dữ liệu...</td></tr>";
     try {
         const snap = await getDocs(collection(db, 'artifacts', appId_fixed, 'public', 'data', collectionName));
-        let rawData = []; snap.forEach(d => rawData.push({id: d.id, ...d.data()}));
+        let rawData = []; snap.forEach(d => { const data = d.data(); if (data.projectId === projectId) rawData.push({id: d.id, ...data}); });
         const classes = [...new Set(rawData.map(i => i.class))].sort(); 
         const schools = [...new Set(rawData.map(i => i.school))].filter(s => s).sort();
         const fClass = document.getElementById('admin-filter-class'); const oldC = fClass.value; fClass.innerHTML = '<option value="all">Tất cả lớp</option>' + classes.map(c => `<option value="${c}" ${c===oldC?'selected':''}>Lớp ${c}</option>`).join('');
@@ -1140,7 +1487,7 @@ async function renderAdmin() {
         let s = { xs: 0, g: 0, k: 0, d: 0, cd: 0 };
         data.forEach(i => { if(i.score >= 9.0) s.xs++; else if(i.score >= 8.0) s.g++; else if(i.score >= 6.5) s.k++; else if(i.score >= 5.0) s.d++; else s.cd++; });
         statsBox.innerHTML = `<div class="stat-box" style="border-bottom-color: #f59e0b"><b>${s.xs}</b><br><small>X.Sắc</small></div><div class="stat-box" style="border-bottom-color: #10b981"><b>${s.g}</b><br><small>Giỏi</small></div><div class="stat-box" style="border-bottom-color: #3b82f6"><b>${s.k}</b><br><small>Khá</small></div><div class="stat-box" style="border-bottom-color: #8b5cf6"><b>${s.d}</b><br><small>Đạt</small></div><div class="stat-box" style="border-bottom-color: #ef4444"><b>${s.cd}</b><br><small>C.Đạt</small></div>`;
-        listBody.innerHTML = data.map((i, idx) => `<tr><td>${idx+1}</td><td>${i.sbd}</td><td>${i.name}</td><td>${i.class}</td><td>${i.school||'-'}</td><td style="font-size:0.75rem; color:var(--primary); font-weight:bold;">${i.topic || 'KHTN 8'}</td><td><span class="badge-mode ${i.mode === 'practice' ? 'badge-practice' : 'badge-test'}">${i.mode === 'practice' ? 'Luyện tập' : 'Kiểm tra'}</span></td><td><b>${Number((i.score||0).toFixed(2))}</b></td><td>${i.duration}s</td><td>${new Date(i.timestamp).toLocaleDateString()}</td><td style="display:flex; gap:5px;"><button style="background:var(--secondary); color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer" class="btn-view" data-id="${i.id}">👁️</button><button style="background:red; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer" class="btn-del" data-id="${i.id}">X</button></td></tr>`).join('');
+        listBody.innerHTML = data.map((i, idx) => `<tr><td>${idx+1}</td><td>${esc(i.sbd)}</td><td>${esc(i.name)}</td><td>${esc(i.class)}</td><td>${esc(i.school||'-')}</td><td style="font-size:0.75rem; color:var(--primary); font-weight:bold;">${i.topic || 'KHTN 9'}</td><td><span class="badge-mode ${i.mode === 'practice' ? 'badge-practice' : 'badge-test'}">${i.mode === 'practice' ? 'Luyện tập' : 'Kiểm tra'}</span></td><td><b>${Number((i.score||0).toFixed(2))}</b></td><td>${i.duration}s</td><td>${new Date(i.timestamp).toLocaleDateString()}</td><td style="display:flex; gap:5px;"><button style="background:var(--secondary); color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer" class="btn-view" data-id="${i.id}">👁️</button><button style="background:red; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer" class="btn-del" data-id="${i.id}">X</button></td></tr>`).join('');
         listBody.querySelectorAll('.btn-del').forEach(b => b.onclick = () => deleteEntry(b.dataset.id, 'result'));
         listBody.querySelectorAll('.btn-view').forEach(b => b.onclick = () => viewAdminReview(b.dataset.id)); window.currentFilteredData = data; setTimeout(autoScaleApp, 50);
     } catch(e) { listBody.innerHTML = "<tr><td colspan='11'>Lỗi kết nối Firebase.</td></tr>"; }
@@ -1186,7 +1533,7 @@ async function renderAdminStudents() {
         if(data.length === 0) {
             listBody.innerHTML = "<tr><td colspan='6' style='text-align: center;'>Chưa có danh sách học sinh. Vui lòng Import từ Excel.</td></tr>";
         } else {
-            listBody.innerHTML = data.map((i, idx) => `<tr><td style="text-align:center;">${idx+1}</td><td><b>${i.name}</b></td><td>${i.class}</td><td>${i.sbd}</td><td>${i.school}</td><td style="text-align:center;"><button style="background:var(--danger); color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer" class="btn-del-stu" data-id="${i.id}">Xóa</button></td></tr>`).join('');
+            listBody.innerHTML = data.map((i, idx) => `<tr><td style="text-align:center;">${idx+1}</td><td><b>${esc(i.name)}</b></td><td>${esc(i.class)}</td><td>${esc(i.sbd)}</td><td>${esc(i.school)}</td><td style="text-align:center;"><button style="background:var(--danger); color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer" class="btn-del-stu" data-id="${i.id}">Xóa</button></td></tr>`).join('');
             listBody.querySelectorAll('.btn-del-stu').forEach(b => b.onclick = () => deleteEntry(b.dataset.id, 'student'));
         }
         setTimeout(autoScaleApp, 50);
@@ -1259,11 +1606,11 @@ document.getElementById('btn-ar-retry').onclick = () => {
 
 // EXCEL IMPORT & EXPORT
 document.getElementById('btn-download-template').onclick = () => {
-    const templateData = [{ "STT": 1, "Họ và Tên": "Nguyễn Văn A", "Lớp": "8/1", "SBD": "01", "Trường": "THCS Thanh Thủy" }, { "STT": 2, "Họ và Tên": "Trần Thị B", "Lớp": "8/2", "SBD": "02", "Trường": "THCS Thanh Thủy" }];
+    const templateData = [{ "STT": 1, "Họ và Tên": "Nguyễn Văn A", "Lớp": "9/1", "SBD": "01", "Trường": "THCS Thanh Thủy" }, { "STT": 2, "Họ và Tên": "Trần Thị B", "Lớp": "9/2", "SBD": "02", "Trường": "THCS Thanh Thủy" }];
     const ws = XLSX.utils.json_to_sheet(templateData);
     ws['!cols'] = [{wch: 5}, {wch: 30}, {wch: 10}, {wch: 10}, {wch: 30}];
     const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "DanhSachHocSinh");
-    XLSX.writeFile(wb, "Mau_DanhSachHocSinh_KHTN8.xlsx");
+    XLSX.writeFile(wb, "Mau_DanhSachHocSinh_KHTN9.xlsx");
 };
 
 document.getElementById('btn-trigger-import').onclick = () => {
@@ -1274,7 +1621,7 @@ document.getElementById('btn-delete-all-students').onclick = () => {
     pendingAuthAction = 'delete_all_students'; 
     if (auth.currentUser && !auth.currentUser.isAnonymous) { executePendingAdminAction(); return; }
     document.getElementById('auth-action-title').innerText = "Xác nhận Xóa TOÀN BỘ HS"; 
-    document.getElementById('delete-pw').value = ''; document.getElementById('delete-email').value = '';
+    document.getElementById('delete-pw').value = ''; document.getElementById('delete-email').value = ''; document.getElementById('delete-adv').value = '';
     document.getElementById('delete-auth-modal').style.display = 'flex'; 
 };
 
@@ -1316,7 +1663,7 @@ document.getElementById('file-import-students').onchange = (e) => {
                 let msg = "Xác nhận Import " + importedStudentsCache.length + " HS";
                 if(duplicateCount > 0) msg += " (Bỏ qua " + duplicateCount + " trùng)";
                 document.getElementById('auth-action-title').innerText = msg; 
-                document.getElementById('delete-pw').value = ''; document.getElementById('delete-email').value = '';
+                document.getElementById('delete-pw').value = ''; document.getElementById('delete-email').value = ''; document.getElementById('delete-adv').value = '';
                 document.getElementById('delete-auth-modal').style.display = 'flex'; 
             } else {
                 if(duplicateCount > 0) {
@@ -1338,7 +1685,7 @@ function deleteEntry(id, type) {
     currentDeleteId = id; 
     if (auth.currentUser && !auth.currentUser.isAnonymous) { executePendingAdminAction(); return; }
     document.getElementById('auth-action-title').innerText = "Xác nhận Xoá"; 
-    document.getElementById('delete-pw').value = ''; document.getElementById('delete-email').value = '';
+    document.getElementById('delete-pw').value = ''; document.getElementById('delete-email').value = ''; document.getElementById('delete-adv').value = '';
     document.getElementById('delete-auth-modal').style.display = 'flex'; 
 }
 
@@ -1357,7 +1704,7 @@ async function executePendingAdminAction() {
             const snap = await getDocs(collection(db, 'artifacts', appId_fixed, 'public', 'data', collectionStudents));
             const deletePromises = [];
             snap.forEach(docSnap => {
-                deletePromises.push(deleteDoc(doc(db, 'artifacts', appId_fixed, 'public', 'data', collectionStudents, docSnap.id)));
+                if (docSnap.data().projectId === projectId) deletePromises.push(deleteDoc(doc(db, 'artifacts', appId_fixed, 'public', 'data', collectionStudents, docSnap.id)));
             });
             await Promise.all(deletePromises);
             showCustomAlert("✅ Đã làm sạch toàn bộ danh sách học sinh!");
@@ -1365,20 +1712,44 @@ async function executePendingAdminAction() {
         } catch(e) { showCustomAlert("Lỗi khi xóa dữ liệu!"); }
     }
     else if (pendingAuthAction === 'import_students' && importedStudentsCache.length > 0) {
-        showCustomAlert("Đang tiến hành nhập dữ liệu, vui lòng đợi...");
+        let completed = 0;
+        const total = importedStudentsCache.length;
+        const BATCH_SIZE = 400;
+        const studentsRef = collection(db, 'artifacts', appId_fixed, 'public', 'data', collectionStudents);
+        const progressBox = document.getElementById('custom-alert');
+        progressBox.textContent = `Đang import học sinh: 0/${total}`;
+        progressBox.style.display = 'block';
         try {
-            for(let i=0; i<importedStudentsCache.length; i++) {
-                await addDoc(collection(db, 'artifacts', appId_fixed, 'public', 'data', collectionStudents), importedStudentsCache[i]);
+            for (let start = 0; start < total; start += BATCH_SIZE) {
+                const batch = writeBatch(db);
+                const chunk = importedStudentsCache.slice(start, start + BATCH_SIZE);
+
+                chunk.forEach(student => {
+                    // Giữ ID ổn định trong cache để có thể retry mà không tạo bản ghi trùng.
+                    if (!student._importDocId) student._importDocId = doc(studentsRef).id;
+                    const { _importDocId, ...studentData } = student;
+                    batch.set(doc(studentsRef, _importDocId), { ...studentData, projectId });
+                });
+
+                await batch.commit();
+                completed += chunk.length;
+
+                progressBox.textContent = `Đang import học sinh: ${completed}/${total}`;
+                progressBox.style.display = 'block';
             }
-            showCustomAlert(`✅ Đã import thành công ${importedStudentsCache.length} học sinh!`);
+
+            showCustomAlert(`✅ Đã import thành công ${completed} học sinh!`);
             importedStudentsCache = [];
             renderAdminStudents();
-        } catch(e) { showCustomAlert("Lỗi khi tải dữ liệu lên Server!"); }
+        } catch(e) {
+            console.error("Lỗi import học sinh:", e);
+            showCustomAlert(`⚠️ Import lỗi sau ${completed}/${total} học sinh. Dữ liệu đã ghi được giữ lại; hãy thử lại để tiếp tục. Mã lỗi: ${e.code || 'unknown'}`);
+        }
     }
     else if (pendingAuthAction === 'toggle_autoscale') {
         const newState = !isAutoScaleEnabled;
         try {
-            await setDoc(doc(db, 'artifacts', appId_fixed, 'public', 'data', 'config', 'timer_settings'), { autoScale: newState, lastUpdated: new Date().toISOString() }, { merge: true }); 
+            await setDoc(doc(db, 'artifacts', appId_fixed, 'public', 'data', 'config', `timer_settings_${projectId}`), { autoScale: newState, lastUpdated: new Date().toISOString() }, { merge: true }); 
             isAutoScaleEnabled = newState;
             document.getElementById('autoscale-status').innerText = isAutoScaleEnabled ? '🟢' : '🔴';
             showCustomAlert(`Đã ${isAutoScaleEnabled ? 'BẬT' : 'TẮT'} tính năng thu phóng (PC) thành công!`);
@@ -1388,7 +1759,7 @@ async function executePendingAdminAction() {
     else if (pendingAuthAction === 'config') {
         const pTime = parseInt(document.getElementById('cfg-time-practice').value), tTime = parseInt(document.getElementById('cfg-time-test').value), mHints = parseInt(document.getElementById('cfg-max-hints').value);
         if(isNaN(pTime) || isNaN(tTime) || isNaN(mHints) || pTime <= 0 || tTime <= 0 || mHints < 0) { showCustomAlert("⚠️ Vui lòng nhập số hợp lệ!"); return; }
-        try { await setDoc(doc(db, 'artifacts', appId_fixed, 'public', 'data', 'config', 'timer_settings'), { practice: pTime, test: tTime, maxHints: mHints, autoScale: isAutoScaleEnabled, lastUpdated: new Date().toISOString() }, { merge: true }); practiceTimeLimit = pTime * 60; testTimeLimit = tTime * 60; maxHintsAllowed = mHints; showCustomAlert("Đã cập nhật cấu hình thành công!"); } catch(e) { showCustomAlert("Lỗi khi lưu cấu hình!"); }
+        try { await setDoc(doc(db, 'artifacts', appId_fixed, 'public', 'data', 'config', `timer_settings_${projectId}`), { practice: pTime, test: tTime, maxHints: mHints, autoScale: isAutoScaleEnabled, lastUpdated: new Date().toISOString() }, { merge: true }); practiceTimeLimit = pTime * 60; testTimeLimit = tTime * 60; maxHintsAllowed = mHints; showCustomAlert("Đã cập nhật cấu hình thành công!"); } catch(e) { showCustomAlert("Lỗi khi lưu cấu hình!"); }
     } else if (pendingAuthAction === 'inbox') { renderAdminInbox(); }
     pendingAuthAction = null;
 }
@@ -1397,7 +1768,7 @@ document.getElementById('btn-toggle-autoscale').onclick = () => {
     pendingAuthAction = 'toggle_autoscale'; 
     if (auth.currentUser && !auth.currentUser.isAnonymous) { executePendingAdminAction(); return; }
     document.getElementById('auth-action-title').innerText = "Xác nhận Đổi Thu Phóng"; 
-    document.getElementById('delete-pw').value = ''; document.getElementById('delete-email').value = '';
+    document.getElementById('delete-pw').value = ''; document.getElementById('delete-email').value = ''; document.getElementById('delete-adv').value = '';
     document.getElementById('delete-auth-modal').style.display = 'flex'; 
 };
 
@@ -1405,7 +1776,7 @@ document.getElementById('btn-save-config').onclick = () => {
     pendingAuthAction = 'config'; 
     if (auth.currentUser && !auth.currentUser.isAnonymous) { executePendingAdminAction(); return; }
     document.getElementById('auth-action-title').innerText = "Lưu Cấu Hình"; 
-    document.getElementById('delete-pw').value = ''; document.getElementById('delete-email').value = '';
+    document.getElementById('delete-pw').value = ''; document.getElementById('delete-email').value = ''; document.getElementById('delete-adv').value = '';
     document.getElementById('delete-auth-modal').style.display = 'flex'; 
 };
 
@@ -1413,7 +1784,7 @@ document.getElementById('btn-admin-inbox').onclick = () => {
     pendingAuthAction = 'inbox'; 
     if (auth.currentUser && !auth.currentUser.isAnonymous) { executePendingAdminAction(); return; }
     document.getElementById('auth-action-title').innerText = "Mở Hộp Thư 📩"; 
-    document.getElementById('delete-pw').value = ''; document.getElementById('delete-email').value = '';
+    document.getElementById('delete-pw').value = ''; document.getElementById('delete-email').value = ''; document.getElementById('delete-adv').value = '';
     document.getElementById('delete-auth-modal').style.display = 'flex'; 
 };
 
@@ -1423,6 +1794,12 @@ document.getElementById('btn-delete-confirm').onclick = async () => {
     const email = document.getElementById('delete-email').value.trim();
     const pw = document.getElementById('delete-pw').value;
     if (!email || !pw) { showCustomAlert("Vui lòng nhập Email và Mật khẩu!"); return; }
+    const wait = lockRemaining('adv'); if (wait > 0) { showCustomAlert(`⛔ Nhập sai nhiều lần. Vui lòng thử lại sau ${wait} giây.`); return; }
+    if (ADV_PW_HASH) {
+        const okAdv = await verifyPassword(document.getElementById('delete-adv').value, ADV_PW_HASH);
+        if (!okAdv) { recordFail('adv'); showCustomAlert("⚠️ Sai mật khẩu cao cấp!"); return; }
+        recordOk('adv');
+    }
     
     document.getElementById('btn-delete-confirm').innerText = "...";
     try {
@@ -1436,9 +1813,19 @@ document.getElementById('btn-delete-confirm').onclick = async () => {
     document.getElementById('btn-delete-confirm').innerText = "XÁC NHẬN";
 };
 
-document.getElementById('btn-admin-open').onclick = () => document.getElementById('admin-auth-modal').style.display = 'flex';
+document.getElementById('btn-admin-open').onclick = () => { document.getElementById('admin-auth-modal').style.display = 'flex'; if (!IS_TOUCH) setTimeout(() => document.getElementById('admin-pw').focus(), 50); };
+(function(){ if (ADV_PW_HASH) document.getElementById('delete-adv').style.display = 'block'; })();
 document.getElementById('btn-auth-cancel').onclick = () => document.getElementById('admin-auth-modal').style.display = 'none';
-document.getElementById('btn-auth-confirm').onclick = () => { if(document.getElementById('admin-pw').value === "112233@@") { document.getElementById('admin-auth-modal').style.display='none'; showScreen('screen-admin'); renderAdmin(); } else showCustomAlert("Sai mật khẩu!"); };
+document.getElementById('btn-auth-confirm').onclick = async () => {
+    const btn = document.getElementById('btn-auth-confirm'); if (btn.disabled) return;
+    const wait = lockRemaining('adm'); if (wait > 0) { showCustomAlert(`⛔ Nhập sai nhiều lần. Vui lòng thử lại sau ${wait} giây.`); return; }
+    const pw = document.getElementById('admin-pw').value; if (!pw) { showCustomAlert("Vui lòng nhập mật khẩu!"); return; }
+    btn.disabled = true; const t = btn.innerText; btn.innerText = "...";
+    const ok = await verifyPassword(pw, ADMIN_PW_HASH);
+    btn.disabled = false; btn.innerText = t;
+    if (ok) { recordOk('adm'); document.getElementById('admin-pw').value = ''; document.getElementById('admin-auth-modal').style.display='none'; showScreen('screen-admin'); renderAdmin(); }
+    else { recordFail('adm'); showCustomAlert("Sai mật khẩu!"); }
+};
 
 document.getElementById('btn-init-practice').onclick = () => initGame('practice'); document.getElementById('btn-init-test').onclick = () => initGame('test');
 document.getElementById('btn-prev').onclick = () => { if(currentIdx > 0) { currentIdx--; renderQuestion(); window.scrollTo(0,0); } };
@@ -1491,7 +1878,7 @@ document.getElementById('btn-report-submit').onclick = async () => {
     if (!qPos && !detail) { showCustomAlert("Vui lòng nhập ít nhất vị trí lỗi hoặc mô tả!"); return; }
     const btn = document.getElementById('btn-report-submit'); btn.innerText = "ĐANG GỬI..."; btn.disabled = true;
     try {
-        await addDoc(collection(db, 'artifacts', appId_fixed, 'public', 'data', collectionReports), { name: window.finalUserData?.name || "Học sinh Ẩn danh", question: qPos, detail: detail, image: reportImageBase64, timestamp: new Date().toISOString() });
+        await addDoc(collection(db, 'artifacts', appId_fixed, 'public', 'data', collectionReports), { projectId, name: window.finalUserData?.name || "Học sinh Ẩn danh", question: qPos, detail: detail, image: reportImageBase64, timestamp: new Date().toISOString() });
         document.getElementById('report-modal').style.display = 'none'; showCustomAlert("Cảm ơn bạn đã gửi báo lỗi!");
         document.getElementById('report-question').value = ''; document.getElementById('report-detail').value = ''; document.getElementById('report-file').value = ''; document.getElementById('report-img-preview').style.display = 'none'; reportImageBase64 = "";
     } catch(e) { showCustomAlert("Có lỗi xảy ra, vui lòng thử lại sau!"); }
@@ -1502,9 +1889,9 @@ async function renderAdminInbox() {
     document.getElementById('admin-inbox-modal').style.display = 'flex'; const listBody = document.getElementById('inbox-list-body'); listBody.innerHTML = "<tr><td colspan='6'>Đang tải hộp thư...</td></tr>";
     try {
         const snap = await getDocs(collection(db, 'artifacts', appId_fixed, 'public', 'data', collectionReports));
-        let reports = []; snap.forEach(d => reports.push({id: d.id, ...d.data()})); reports.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+        let reports = []; snap.forEach(d => { const data = d.data(); if (data.projectId === projectId) reports.push({id: d.id, ...data}); }); reports.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
         if (reports.length === 0) { listBody.innerHTML = "<tr><td colspan='6' style='text-align:center;'>Hộp thư trống. Chưa có báo cáo nào!</td></tr>"; return; }
-        listBody.innerHTML = reports.map(r => `<tr><td><small>${new Date(r.timestamp).toLocaleString('vi-VN')}</small></td><td><b>${r.name}</b></td><td>${r.question || '-'}</td><td>${r.detail || '-'}</td><td>${r.image ? `<button class="btn btn-gray btn-view-img" data-img="${r.image}" style="padding:4px 8px; font-size:0.75rem;">Xem ảnh 🖼️</button>` : '-'}</td><td><button class="btn-del-report" data-id="${r.id}" style="background:var(--danger); color:white; border:none; padding:6px 10px; border-radius:4px; cursor:pointer; font-size: 0.8rem;">Xóa</button></td></tr>`).join('');
+        listBody.innerHTML = reports.map(r => `<tr><td><small>${new Date(r.timestamp).toLocaleString('vi-VN')}</small></td><td><b>${esc(r.name)}</b></td><td>${esc(r.question || '-')}</td><td>${esc(r.detail || '-')}</td><td>${r.image ? `<button class="btn btn-gray btn-view-img" data-img="${r.image}" style="padding:4px 8px; font-size:0.75rem;">Xem ảnh 🖼️</button>` : '-'}</td><td><button class="btn-del-report" data-id="${r.id}" style="background:var(--danger); color:white; border:none; padding:6px 10px; border-radius:4px; cursor:pointer; font-size: 0.8rem;">Xóa</button></td></tr>`).join('');
         listBody.querySelectorAll('.btn-del-report').forEach(b => { b.onclick = async () => { if (confirm("Xóa báo cáo lỗi này?")) { b.innerText = "..."; b.disabled = true; await deleteDoc(doc(db, 'artifacts', appId_fixed, 'public', 'data', collectionReports, b.dataset.id)); renderAdminInbox(); } } });
         listBody.querySelectorAll('.btn-view-img').forEach(b => { b.onclick = () => { document.getElementById('image-viewer-img').src = b.dataset.img; document.getElementById('image-viewer-modal').style.display = 'flex'; } });
     } catch(e) {}
@@ -1540,19 +1927,19 @@ document.getElementById('btn-view-review').onclick = () => {
 
 document.getElementById('btn-export-excel').onclick = () => {
     const dataToExport = window.currentFilteredData || []; if (dataToExport.length === 0) { showCustomAlert("Không có dữ liệu để xuất!"); return; }
-    const excelRows = dataToExport.map((item, index) => ({ "STT": index + 1, "Họ và Tên": item.name || "", "Số báo danh": item.sbd || "", "Lớp": item.class || "", "Trường": item.school || "", "Chuyên đề": item.topic || "KHTN 8", "Chế độ làm": item.mode === 'practice' ? "Luyện tập" : "Kiểm tra", "Điểm số": Number((item.score || 0).toFixed(2)), "Thời gian làm (giây)": item.duration || 0, "Ngày nộp bài": new Date(item.timestamp).toLocaleString('vi-VN') }));
+    const excelRows = dataToExport.map((item, index) => ({ "STT": index + 1, "Họ và Tên": item.name || "", "Số báo danh": item.sbd || "", "Lớp": item.class || "", "Trường": item.school || "", "Chuyên đề": item.topic || "KHTN 9", "Chế độ làm": item.mode === 'practice' ? "Luyện tập" : "Kiểm tra", "Điểm số": Number((item.score || 0).toFixed(2)), "Thời gian làm (giây)": item.duration || 0, "Ngày nộp bài": new Date(item.timestamp).toLocaleString('vi-VN') }));
     const ws = XLSX.utils.json_to_sheet(excelRows); ws['!cols'] = [{wch: 5}, {wch: 25}, {wch: 12}, {wch: 10}, {wch: 25}, {wch: 35}, {wch: 15}, {wch: 10}, {wch: 18}, {wch: 25}];
-    const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Báo cáo học tập"); XLSX.writeFile(wb, `KetQua_KHTN8_${new Date().getTime()}.xlsx`);
+    const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Báo cáo học tập"); XLSX.writeFile(wb, `KetQua_KHTN9_${new Date().getTime()}.xlsx`);
 };
 
 function showScreen(id) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); setTimeout(autoScaleApp, 50); }
 function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
-function startTimer() { clearInterval(timerInt); timerInt = setInterval(() => { timeLeft--; const el = document.getElementById('timer'); if(el) el.innerText = `${Math.floor(timeLeft/60)}:${(timeLeft%60).toString().padStart(2,'0')}`; if(timeLeft <= 0) calculateResult(); }, 1000); }
+function startTimer() { clearInterval(timerInt); const endAt = Date.now() + timeLeft * 1000; timerInt = setInterval(() => { timeLeft = Math.max(0, Math.round((endAt - Date.now()) / 1000)); const el = document.getElementById('timer'); if(el) el.innerText = `${Math.floor(timeLeft/60)}:${(timeLeft%60).toString().padStart(2,'0')}`; if(timeLeft <= 0) { clearInterval(timerInt); calculateResult(); } }, 500); }
 
 const triggerCheat = () => { if (canCheckCheat && isQuizRunning && mode === 'test' && !isProcessingCheat) { isProcessingCheat = true; isQuizRunning = false; calculateResult(); document.getElementById('cheat-modal').style.display = 'flex'; } };
 document.addEventListener('visibilitychange', () => { if(canCheckCheat && isQuizRunning && mode === 'test' && document.visibilityState === 'hidden') { triggerCheat(); } });
-window.addEventListener('blur', () => { setTimeout(() => { if (canCheckCheat && isQuizRunning && mode === 'test' && !document.hasFocus()) { triggerCheat(); } }, 200); });
-window.addEventListener('resize', () => { if (canCheckCheat && isQuizRunning && mode === 'test') { if (Math.abs(window.innerWidth - (window.testInitialWidth || window.innerWidth)) > 150) { triggerCheat(); } } });
+window.addEventListener('blur', () => { if (IS_TOUCH) return; /* trên điện thoại, blur xảy ra khi kéo thanh thông báo/bàn phím: chỉ dùng visibilitychange */ setTimeout(() => { if (canCheckCheat && isQuizRunning && mode === 'test' && !document.hasFocus()) { triggerCheat(); } }, 200); });
+window.addEventListener('resize', () => { if (IS_TOUCH) return; /* xoay màn hình không bị tính gian lận */ if (canCheckCheat && isQuizRunning && mode === 'test') { if (Math.abs(window.innerWidth - (window.testInitialWidth || window.innerWidth)) > 150) { triggerCheat(); } } });
 
 window.onload = () => { 
     document.getElementById('main-header').style.display = 'none'; 
